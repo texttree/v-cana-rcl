@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Redactor, TreeView, ContextMenu } from '@texttree/notepad-rcl';
-import { convertNotesToTree } from './helper';
+import { convertNotesToTree } from '../../utils/helper';
 
 function NoteEditor({
   activeNote,
