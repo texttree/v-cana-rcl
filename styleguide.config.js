@@ -9,7 +9,10 @@ let sections = [
   },
   {
     name: 'Button Block',
-    components: ['src/components/Button/Button.js'],
+    components: [
+      'src/components/Button/Button.js',
+      'src/components/hooks/useWindowScrollPosition.jsx',
+    ],
   },
 ];
 
@@ -68,7 +71,7 @@ module.exports = {
   usageMode: 'expand',
   pagePerSection: true,
   getComponentPathLine(componentPath) {
-    const componentName = path.basename(componentPath, '.js');
+    const componentName = path.basename(componentPath, '.js').split('.')[0];
     return `import { ${componentName} } from '${name}';`;
   },
   updateExample(props, exampleFilePath) {
@@ -89,7 +92,7 @@ module.exports = {
     module: {
       rules: [
         {
-          test: /\.js$/,
+          test: /\.jsx?$/,
           exclude: /node_modules/,
           loader: 'babel-loader',
         },

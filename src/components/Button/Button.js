@@ -1,11 +1,23 @@
 import React from 'react';
-import { Button as MuiButton } from '@material-ui/core';
-import { log } from '../../utils';
+import { truncateText } from '../../utils/helper';
 import PropTypes from 'prop-types';
 
 function Button({ text, onClick }) {
-  log('test');
-  return <MuiButton onClick={onClick}>{text}</MuiButton>;
+  return (
+    <div
+      style={{
+        cursor: 'pointer',
+        background: '#174cc8',
+        color: 'white',
+        display: 'inline-block',
+        padding: '10px',
+        borderRadius: '5px',
+      }}
+      onClick={onClick}
+    >
+      {truncateText(text, 12)}
+    </div>
+  );
 }
 
 Button.defaultProps = {
