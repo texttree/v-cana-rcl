@@ -6,7 +6,8 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[md]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "files.trimTrailingWhitespace": false
   },
   "eslint.format.enable": true,
   "[javascript]": {
@@ -15,7 +16,6 @@
   "[javascriptreact]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
-  "eslint.alwaysShowStatus": true,
   "editor.formatOnSave": true,
   "editor.detectIndentation": false,
   "editor.formatOnPaste": true,
