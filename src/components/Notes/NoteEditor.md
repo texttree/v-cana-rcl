@@ -213,11 +213,7 @@ function Component() {
       className: 'cursor-pointer bg-th-secondary-100 hover:bg-th-secondary-200',
     },
   };
-  const handleRemoveNode = ({ ids }) => {
-    if (currentNodeProps) {
-      currentNodeProps.tree.delete(currentNodeProps.node.id);
-    }
-  };
+
   const dropMenuClassNames = { container: menuItems.container, item: menuItems.item };
 
   const saveNote = () => {
@@ -243,8 +239,13 @@ function Component() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeNote]);
-
-  const removeNode = ({ ids }) => {
+  const removeNode = () => {
+    if (currentNodeProps) {
+      const newNotes = [...databaseNotes];
+      setDatabaseNotes(newNotes.filter((note) => note.id !== currentNodeProps.node.id));
+    }
+  };
+  const handleRemoveNode = ({ ids }) => {
     if (currentNodeProps) {
       if (ids && ids.length) {
         setDatabaseNotes(databaseNotes.filter((el) => !ids.includes(el.id)));
