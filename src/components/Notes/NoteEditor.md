@@ -1,7 +1,7 @@
 ### Default example
 
 ```jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { notes } from './data.js';
 import { generateUniqueId, exportNotes, importNotes } from './helper.js';
 import { icons } from './icons.js';
@@ -9,22 +9,23 @@ import { icons } from './icons.js';
 import { NoteEditor } from '@texttree/template-rcl';
 import MenuButtons from './MenuButtons';
 import Modal from './Modal';
+
 const classes = {
   container: 'relative',
+  back: 'flex w-fit p-1 cursor-pointer hover:opacity-70 rounded-full bg-th-secondary-100',
   redactor: {
-    title: 'p-2 my-4 bg-gray-300 font-bold rounded-lg shadow-md',
-    redactor:
-      'pb-20 pt-4 px-4 my-4 bg-th-secondary-100 overflow-hidden break-words rounded-lg shadow-md',
+    title: 'p-2 my-4 font-bold rounded-lg shadow-md',
+    redactor: 'pb-20 pt-4 px-4 my-4 overflow-hidden break-words rounded-lg shadow-md',
   },
   treeView: {
-    nodeWrapper:
-      'flex px-5 leading-[47px] text-lg cursor-pointer rounded-lg bg-th-secondary-100 hover:bg-th-secondary-200',
+    nodeWrapper: 'flex px-5 leading-[47px] text-lg cursor-pointer rounded-lg',
     nodeTextBlock: 'items-center truncate',
   },
   search: {
     input:
-      'input-base py-2 text-th-text-primary border-gray focus:border-gray placeholder:text-gray flex-1 px-4 w-full text-sm md:text-base rounded-lg border focus:outline-none',
+      'py-2 text-th-text-primary border-gray focus:border-gray placeholder:text-gray flex-1 px-4 w-full text-sm md:text-base rounded-lg border focus:outline-none',
     container: 'relative flex items-center mb-4',
+    close: 'absolute р-6 w-6 right-1 z-10 cursor-pointer',
   },
 };
 
@@ -95,7 +96,7 @@ function Component() {
   };
   const addNode = (isFolder = false) => {
     const id = generateUniqueId(allNotes);
-    const title = isFolder ? 'NewFolder' : 'NewNote';
+    const title = isFolder ? 'New folder' : 'New note';
     const data = {
       blocks: [],
       version: '2.27.2',
@@ -126,6 +127,9 @@ function Component() {
       console.log('Note with id ' + id + ' not found.');
     }
   };
+  const handleRename = () => {
+    currentNodeProps.node.edit();
+  };
   const bulkNode = (note) => {
     const newNotes = [...databaseNotes];
     newNotes.push(note);
@@ -137,7 +141,7 @@ function Component() {
         id: 'adding_note',
         buttonContent: (
           <span className="flex items-center gap-2.5 py-1 pr-7 pl-2.5">
-            {icons.file || ''} {'new note'}
+            {icons.file || ''} {'New note'}
           </span>
         ),
         action: () => addNode(),
@@ -146,7 +150,7 @@ function Component() {
         id: 'adding_folder',
         buttonContent: (
           <span className="flex items-center gap-2.5 py-1 pr-7 pl-2.5">
-            {icons.closeFolder || ''} {'NewFolder'}
+            {icons.closeFolder || ''} {'New folder'}
           </span>
         ),
         action: () => addNode(true),
@@ -215,9 +219,30 @@ function Component() {
     }
   };
   const dropMenuClassNames = { container: menuItems.container, item: menuItems.item };
-  const handleRename = () => {
-    currentNodeProps.node.edit();
+
+  const saveNote = () => {
+    const index = databaseNotes.findIndex((note) => note.id === noteId);
+
+    if (index !== -1) {
+      const updatedNotes = [...databaseNotes];
+      updatedNotes[index] = activeNote;
+      setDatabaseNotes(updatedNotes);
+    }
   };
+
+  useEffect(() => {
+    if (!activeNote || !activeNote.id) {
+      return;
+    }
+    const timer = setTimeout(() => {
+      console.log('save');
+      saveNote();
+    }, 2000);
+    return () => {
+      clearTimeout(timer);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeNote]);
 
   const removeNode = ({ ids }) => {
     if (currentNodeProps) {
@@ -274,15 +299,14 @@ function Component() {
         currentNodeProps={currentNodeProps}
         handleRemoveNode={removeNode}
         handleRenameNode={handleRenameNode}
-        handleRename={handleRename}
         noteId={noteId}
         setNoteId={setNoteId}
-        addNode={addNode}
         menuItems={menuItems}
         icons={icons}
         classes={classes}
         isSearch
         handleBack={handleBack}
+        saveNote={saveNote}
       />
       <Modal isOpen={isOpenModal} closeHandle={() => setIsOpenModal(false)}>
         <div className="flex flex-col gap-7 items-center">

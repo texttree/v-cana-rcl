@@ -12,15 +12,17 @@ function NoteEditor({
   setCurrentNodeProps,
   currentNodeProps,
   handleRenameNode,
-  saveNote = () => {},
-  handleRemoveNode = () => {},
+  saveNote,
+  handleRemoveNode,
   icons,
   noteId,
   setNoteId,
   menuItems,
   classes,
-  isSearch = false,
+  isSearch,
   handleBack,
+  placeholderRedactor,
+  emptyTitle,
 }) {
   const [notesTreeview, setNotesTreeview] = useState(notes);
   const [term, setTerm] = useState('');
@@ -109,8 +111,8 @@ function NoteEditor({
             classes={classes.redactor}
             activeNote={activeNote}
             setActiveNote={setActiveNote}
-            placeholder={'TextNewNote'}
-            emptyTitle={'EmptyTitle'}
+            placeholder={placeholderRedactor}
+            emptyTitle={emptyTitle}
             isSelectableTitle
           />
         </>
@@ -120,30 +122,56 @@ function NoteEditor({
 }
 
 NoteEditor.defaultProps = {
-  classes: {
-    container: 'relative',
-    back: 'flex w-fit p-1 cursor-pointer hover:opacity-70 rounded-full bg-th-secondary-100',
-    redactor: {
-      title: 'p-2 my-4 font-bold rounded-lg shadow-md',
-      redactor: 'pb-20 pt-4 px-4 my-4 overflow-hidden break-words rounded-lg shadow-md',
-    },
-    treeView: {
-      nodeWrapper: 'flex px-5 leading-[47px] text-lg cursor-pointer rounded-lg',
-      nodeTextBlock: 'items-center truncate',
-    },
-    search: {
-      input:
-        'py-2 text-th-text-primary border-gray focus:border-gray placeholder:text-gray flex-1 px-4 w-full text-sm md:text-base rounded-lg border focus:outline-none',
-      container: 'relative flex items-center mb-4',
-      close: 'absolute р-6 w-6 right-1 z-10 cursor-pointer',
-    },
-  },
+  activeNote: null,
+  setActiveNote: () => {},
+  notes: [],
+  selectedNodeId: null,
+  handleDragDrop: () => {},
+  setCurrentNodeProps: () => {},
+  currentNodeProps: {},
+  // handleRenameNode: () => {},
+  saveNote: () => {},
+  handleRemoveNode: () => {},
+  icons: {},
+  noteId: null,
+  setNoteId: () => {},
+  menuItems: {},
+  isSearch: false,
+  handleBack: () => {},
+  classes: {},
+  placeholderRedactor: 'Text new note',
+  emptyTitle: 'Empty title',
 };
 
 NoteEditor.propTypes = {
-  /** Event by clicking on the button. */
-  onClick: PropTypes.func,
-  /** Event by clicking on the button. */
+  // The active note object.
+  activeNote: PropTypes.object,
+  // Function to set the active note.
+  setActiveNote: PropTypes.func,
+  // Array of notes.
+  notes: PropTypes.array,
+  // The ID of the selected node.
+  selectedNodeId: PropTypes.number,
+  // Function to handle drag and drop events.
+  handleDragDrop: PropTypes.func,
+  // Function to set the current node properties.
+  setCurrentNodeProps: PropTypes.func,
+  // The current node's properties object.
+  currentNodeProps: PropTypes.object,
+  // Function to handle renaming a node.
+  handleRenameNode: PropTypes.func,
+  // Function to save a note.
+  saveNote: PropTypes.func,
+  // Function to handle removing a node.
+  handleRemoveNode: PropTypes.func,
+  // Object containing icons.
+  icons: PropTypes.object,
+  // The ID of the note.
+  noteId: PropTypes.string,
+  // Function to set the note ID.
+  setNoteId: PropTypes.func,
+  // Array of menu items.
+  menuItems: PropTypes.object,
   classes: PropTypes.shape({
     redactor: PropTypes.shape({
       title: PropTypes.string,
@@ -158,6 +186,14 @@ NoteEditor.propTypes = {
       container: PropTypes.string,
     }),
   }),
+  // Placeholder text for the redactor input.
+  placeholderRedactor: PropTypes.string,
+  // Text to display when the title is empty.
+  emptyTitle: PropTypes.string,
+  // Indicates if the component is in search mode.
+  isSearch: PropTypes.bool,
+  // Function to handle navigating back.
+  handleBack: PropTypes.func,
 };
 
 export default NoteEditor;
