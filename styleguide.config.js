@@ -8,6 +8,10 @@ let sections = [
     content: 'README.md',
   },
   {
+    name: 'Hooks example Block',
+    components: ['src/components/hooks/useWindowScrollPosition.jsx'],
+  },
+  {
     name: 'PersonalNotes Block',
     components: ['src/components/Notes/NoteEditor.js'],
   },
@@ -73,7 +77,7 @@ module.exports = {
   usageMode: 'expand',
   pagePerSection: true,
   getComponentPathLine(componentPath) {
-    const componentName = path.basename(componentPath, '.js');
+    const componentName = path.basename(componentPath, '.js').split('.')[0];
     return `import { ${componentName} } from '${name}';`;
   },
   updateExample(props, exampleFilePath) {
@@ -94,7 +98,7 @@ module.exports = {
     module: {
       rules: [
         {
-          test: /\.js$/,
+          test: /\.jsx?$/,
           exclude: /node_modules/,
           loader: 'babel-loader',
         },

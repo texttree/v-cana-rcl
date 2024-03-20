@@ -1,7 +1,7 @@
 {
-  "name": "@texttree/template-rcl",
+  "name": "@texttree/v-cana-rcl",
   "author": "TextTree.org",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
   "keywords": [
     "rcl",
@@ -10,20 +10,20 @@
   "license": "MIT",
   "private": false,
   "main": "dist/index.js",
-  "url": "https://github.com/texttree/template-rcl",
-  "homepage": "https://github.com/texttree/template-rcl#readme",
+  "url": "https://github.com/texttree/v-cana-rcl",
+  "homepage": "https://github.com/texttree/v-cana-rcl#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/texttree/template-rcl.git"
+    "url": "git+https://github.com/texttree/v-cana-rcl.git"
   },
   "bugs": {
-    "url": "https://github.com/texttree/template-rcl/issues"
+    "url": "https://github.com/texttree/v-cana-rcl/issues"
   },
   "publishConfig": {
     "access": "public"
   },
   "lint-staged": {
-    "src/**/*.js": [
+    "src/**/*.jsx?": [
       "eslint --fix"
     ],
     "*.+(json|md)": [
@@ -35,46 +35,54 @@
     "start": "styleguidist server",
     "lint": "eslint --fix .",
     "precommit": "lint-staged",
-    "prepare": "husky install",
-    "prepublishOnly": "shx rm -rf ./dist & babel ./src --out-dir ./dist -s inline",
+    "prepare": "husky",
+    "test": "jest",
+    "build:babel": "babel src --out-dir dist --ignore src/components/**/*.jsx",
+    "prepublishOnly": "rm -fr ./dist & yarn build:babel",
     "prettier": "prettier --write .",
-    "release": "standard-version",
-    "release:first": "standard-version --first-release",
-    "release:major": "standard-version --release-as major",
-    "release:minor": "standard-version --release-as minor",
-    "release:patch": "standard-version --release-as patch"
+    "release": "commit-and-tag-version",
+    "release:first": "commit-and-tag-version --first-release",
+    "release:major": "commit-and-tag-version --release-as major",
+    "release:minor": "commit-and-tag-version --release-as minor",
+    "release:patch": "commit-and-tag-version --release-as patch"
   },
   "peerDependencies": {
-    "@material-ui/core": "^4.x",
     "prop-types": "^15.x",
     "react": "^18.x",
     "react-dom": "^18.x"
   },
   "devDependencies": {
-    "@babel/cli": "^7.20.7",
-    "@babel/core": "^7.20.12",
-    "@babel/eslint-parser": "^7.19.1",
-    "@babel/preset-env": "^7.20.2",
-    "@babel/preset-react": "^7.18.6",
-    "@commitlint/cli": "^17.4.1",
-    "@commitlint/config-conventional": "^17.4.0",
-    "@material-ui/core": "^4.12.4",
-    "babel-loader": "^9.1.2",
-    "eslint": "^8.32.0",
-    "eslint-config-prettier": "^8.6.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.32.1",
+    "@babel/cli": "^7.23.9",
+    "@babel/core": "^7.24.0",
+    "@babel/eslint-parser": "^7.23.10",
+    "@babel/preset-env": "^7.24.0",
+    "@babel/preset-react": "^7.23.3",
+    "@commitlint/cli": "^18.6.1",
+    "@commitlint/config-conventional": "^18.6.1",
+    "@testing-library/jest-dom": "^6.4.2",
+    "@testing-library/react": "^14.2.1",
+    "@testing-library/user-event": "^14.5.2",
+    "babel-jest": "^29.7.0",
+    "babel-loader": "^9.1.3",
+    "commit-and-tag-version": "^12.2.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-jest-dom": "^5.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "eslint-plugin-react": "^7.34.0",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.1.0",
-    "prettier": "^2.8.3",
+    "eslint-plugin-testing-library": "^6.2.0",
+    "husky": "^9.0.11",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
     "prop-types": "^15.8.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-styleguidist": "^13.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-styleguidist": "^13.1.2",
     "shx": "^0.3.4",
-    "standard-version": "^9.5.0",
-    "webpack": "^5.75.0"
+    "webpack": "^5.90.3"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.18",

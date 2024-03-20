@@ -6,9 +6,9 @@ import { notes } from './data.js';
 import { generateUniqueId, exportNotes, importNotes } from './helper.js';
 import { icons } from './icons.js';
 
-import { NoteEditor } from '@texttree/template-rcl';
+import { NoteEditor } from '@texttree/v-cana-rcl';
 import MenuButtons from './MenuButtons';
-import Modal from './Modal';
+import Modal from '../Modal/Modal.js';
 
 const classes = {
   container: 'relative',
