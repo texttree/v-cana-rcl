@@ -3,7 +3,7 @@
 ```jsx
 import React, { useState, useEffect } from 'react';
 import { notes } from './data.js';
-import { generateUniqueId, exportNotes, importNotes } from './helper.js';
+import { generateUniqueId, exportNotes, importNotes } from '@texttree/v-cana-rcl';
 import { icons } from './icons.js';
 
 import { NoteEditor } from '@texttree/v-cana-rcl';

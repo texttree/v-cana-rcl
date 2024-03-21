@@ -1,16 +1,19 @@
+/**
+ * Recursively converts an array of notes into a tree structure.
+ *
+ * @param {Array} notes - The array of notes to convert.
+ * @param {string|null} parentId - The ID of the parent node. Default is null.
+ * @return {Array|null} The tree structure of the notes, or null if there are no filtered notes.
+ */
 export const convertNotesToTree = (notes = [], parentId = null) => {
   if (!Array.isArray(notes)) {
     return [];
   }
-
   const filteredNotes = notes.filter((note) => note?.parent_id === parentId);
-
   if (filteredNotes?.length === 0) {
     return null;
   }
-
   filteredNotes.sort((a, b) => a?.sorting - b?.sorting);
-
   const newNotes = filteredNotes.map((note) => ({
     id: note?.id,
     name: note?.title,
@@ -66,7 +69,10 @@ export const exportNotes = (notes) => {
   }
 };
 
-function removeIdsFromTree(tree) {
+export const removeIdsFromTree = (tree) => {
+  if (!tree) {
+    return [];
+  }
   function removeIdsFromItem(item) {
     delete item.id;
     delete item.parent_id;
@@ -84,18 +90,23 @@ function removeIdsFromTree(tree) {
   tree.forEach((item) => removeIdsFromItem(item));
 
   return tree;
-}
+};
 
 export function formationJSONToTree(data) {
   const treeData = buildTree(data);
   const transformedData = removeIdsFromTree(treeData);
-
   return transformedData;
 }
 
-function buildTree(items) {
+/**
+ * Builds a tree data structure from the given array of items.
+ *
+ * @param {Array} items - The array of items to build the tree from.
+ * @returns {Array} The tree data structure.
+ */
+export const buildTree = (items) => {
   if (!items) {
-    return;
+    return [];
   }
 
   const tree = [];
@@ -122,7 +133,7 @@ function buildTree(items) {
   });
 
   return tree;
-}
+};
 
 export const importNotes = async (user, bulkNode, notes) => {
   const fileInput = document.createElement('input');

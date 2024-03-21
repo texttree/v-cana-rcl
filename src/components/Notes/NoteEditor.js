@@ -129,7 +129,7 @@ NoteEditor.defaultProps = {
   handleDragDrop: () => {},
   setCurrentNodeProps: () => {},
   currentNodeProps: {},
-  // handleRenameNode: () => {},
+  handleRenameNode: () => {},
   saveNote: () => {},
   handleRemoveNode: () => {},
   icons: {},
