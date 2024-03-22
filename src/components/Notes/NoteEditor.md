@@ -266,7 +266,7 @@ function Component() {
         <MenuButtons
           classNames={{
             dropdown: dropMenuClassNames,
-            button: 'bg-gray-500 p-2 rounded-lg',
+            button: 'bg-gray-500 text-white p-2 rounded-lg',
             container: 'flex gap-2 relative',
             buttonContainer: 'relative',
           }}
