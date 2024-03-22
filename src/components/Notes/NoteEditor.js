@@ -3,27 +3,27 @@ import PropTypes from 'prop-types';
 import { Redactor, TreeView, ContextMenu } from '@texttree/notepad-rcl';
 import { convertNotesToTree } from '../../utils/helper';
 
-function NoteEditor({
+const NoteEditor = ({
   activeNote,
-  setActiveNote,
   notes,
   selectedNodeId,
-  handleDragDrop,
-  setCurrentNodeProps,
   currentNodeProps,
-  handleRenameNode,
-  saveNote,
-  handleRemoveNode,
+  setCurrentNodeProps,
+  setActiveNote,
+  setNoteId,
+  handleSaveNote,
   icons,
   noteId,
-  setNoteId,
   menuItems,
   classes,
   isSearch,
+  handleRemoveNode,
+  handleRenameNode,
+  handleDragDrop,
   handleBack,
   placeholderRedactor,
   emptyTitle,
-}) {
+}) => {
   const [notesTreeview, setNotesTreeview] = useState(notes);
   const [term, setTerm] = useState('');
   const [hoveredNodeId, setHoveredNodeId] = useState(null);
@@ -34,6 +34,7 @@ function NoteEditor({
     const newNotes = convertNotesToTree(notes);
     setNotesTreeview(newNotes);
   }, [notes]);
+
   const changeNode = () => {
     const currentNote = notes.find((el) => el.id === hoveredNodeId);
     setActiveNote(currentNote);
@@ -99,7 +100,7 @@ function NoteEditor({
           <div
             className={classes.back}
             onClick={() => {
-              saveNote();
+              handleSaveNote();
               setActiveNote(null);
               setIsShowMenu(false);
               handleBack();
@@ -119,7 +120,8 @@ function NoteEditor({
       )}
     </div>
   );
-}
+};
+export default NoteEditor;
 
 NoteEditor.defaultProps = {
   activeNote: null,
@@ -130,7 +132,7 @@ NoteEditor.defaultProps = {
   setCurrentNodeProps: () => {},
   currentNodeProps: {},
   handleRenameNode: () => {},
-  saveNote: () => {},
+  handleSaveNote: () => {},
   handleRemoveNode: () => {},
   icons: {},
   noteId: null,
@@ -161,7 +163,7 @@ NoteEditor.propTypes = {
   // Function to handle renaming a node.
   handleRenameNode: PropTypes.func,
   // Function to save a note.
-  saveNote: PropTypes.func,
+  handleSaveNote: PropTypes.func,
   // Function to handle removing a node.
   handleRemoveNode: PropTypes.func,
   // Object containing icons.
@@ -195,5 +197,3 @@ NoteEditor.propTypes = {
   // Function to handle navigating back.
   handleBack: PropTypes.func,
 };
-
-export default NoteEditor;

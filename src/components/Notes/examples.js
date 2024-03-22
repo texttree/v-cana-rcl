@@ -190,7 +190,7 @@ const exportIcon = (
 const dots = (
   <div className="flex items-center justify-center w-6 h-6 space-x-1">
     {[...Array(3).keys()].map((key) => (
-      <div key={key} className="h-1 w-1 bg-black rounded-full" />
+      <div key={key} className="h-1 w-1 bg-white rounded-full" />
     ))}
   </div>
 );
@@ -236,4 +236,68 @@ export const icons = {
   dots,
   close,
   left,
+};
+
+export const notes = [
+  {
+    id: 'first_note_key_from_DB',
+    title: 'note1',
+    user_id: 1,
+    data: {
+      time: 1550476186479,
+      blocks: [
+        {
+          id: 'zbGZFPM-iI',
+          type: 'paragraph',
+          data: {
+            text: 'Hey. Meet the new Editor. On this page you can see it in action — try to edit this text. Source code of the page contains the example of connection and configuration.',
+          },
+        },
+      ],
+      version: '2.27.2',
+    },
+    created_at: new Date('2022-10-15 07:59:58.3642'),
+    is_folder: false,
+    parent_id: null,
+  },
+  {
+    id: 'second_note_key_from_DB',
+    user_id: 1,
+    title: 'note2',
+    data: {
+      time: 1550476186479,
+      blocks: [
+        {
+          id: 'zbGZFPM-iI',
+          type: 'paragraph',
+          data: {
+            text: 'Designed to be extendable and pluggable with a simple API',
+          },
+        },
+      ],
+      version: '2.27.2',
+    },
+    created_at: new Date('2022-10-15 07:59:58.3642'),
+    is_folder: false,
+    parent_id: null,
+  },
+];
+
+export const classes = {
+  container: 'relative',
+  back: 'flex w-fit p-1 cursor-pointer hover:opacity-70 rounded-full bg-gray-300',
+  redactor: {
+    title: 'p-2 my-4 font-bold rounded-lg shadow-md',
+    redactor: 'pb-20 pt-4 px-4 my-4 overflow-hidden break-words rounded-lg shadow-md',
+  },
+  treeView: {
+    nodeWrapper: 'flex px-5 leading-[47px] text-lg cursor-pointer rounded-lg',
+    nodeTextBlock: 'items-center truncate',
+  },
+  search: {
+    input:
+      'py-2 text-black border-gray focus:border-gray placeholder:text-gray flex-1 px-4 w-full text-sm md:text-base rounded-lg border focus:outline-none',
+    container: 'relative flex items-center mb-4',
+    close: 'absolute р-6 w-6 right-1 z-10 cursor-pointer',
+  },
 };

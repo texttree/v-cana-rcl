@@ -2,32 +2,15 @@
 
 ```jsx
 import React, { useState, useEffect } from 'react';
-import { notes } from './data.js';
-import { generateUniqueId, exportNotes, importNotes } from '@texttree/v-cana-rcl';
-import { icons } from './icons.js';
-
-import { NoteEditor } from '@texttree/v-cana-rcl';
-import MenuButtons from './MenuButtons';
+import { notes, icons, classes } from './examples.js';
+import {
+  generateUniqueId,
+  exportNotes,
+  importNotes,
+  NoteEditor,
+  MenuButtons,
+} from '@texttree/v-cana-rcl';
 import Modal from '../Modal/Modal.js';
-
-const classes = {
-  container: 'relative',
-  back: 'flex w-fit p-1 cursor-pointer hover:opacity-70 rounded-full bg-th-secondary-100',
-  redactor: {
-    title: 'p-2 my-4 font-bold rounded-lg shadow-md',
-    redactor: 'pb-20 pt-4 px-4 my-4 overflow-hidden break-words rounded-lg shadow-md',
-  },
-  treeView: {
-    nodeWrapper: 'flex px-5 leading-[47px] text-lg cursor-pointer rounded-lg',
-    nodeTextBlock: 'items-center truncate',
-  },
-  search: {
-    input:
-      'py-2 text-th-text-primary border-gray focus:border-gray placeholder:text-gray flex-1 px-4 w-full text-sm md:text-base rounded-lg border focus:outline-none',
-    container: 'relative flex items-center mb-4',
-    close: 'absolute р-6 w-6 right-1 z-10 cursor-pointer',
-  },
-};
 
 function Component() {
   const [currentNodeProps, setCurrentNodeProps] = useState(null);
@@ -216,7 +199,7 @@ function Component() {
 
   const dropMenuClassNames = { container: menuItems.container, item: menuItems.item };
 
-  const saveNote = () => {
+  const handleSaveNote = () => {
     const index = databaseNotes.findIndex((note) => note.id === noteId);
 
     if (index !== -1) {
@@ -232,7 +215,7 @@ function Component() {
     }
     const timer = setTimeout(() => {
       console.log('save');
-      saveNote();
+      handleSaveNote();
     }, 2000);
     return () => {
       clearTimeout(timer);
@@ -307,7 +290,7 @@ function Component() {
         classes={classes}
         isSearch
         handleBack={handleBack}
-        saveNote={saveNote}
+        handleSaveNote={handleSaveNote}
       />
       <Modal isOpen={isOpenModal} closeHandle={() => setIsOpenModal(false)}>
         <div className="flex flex-col gap-7 items-center">

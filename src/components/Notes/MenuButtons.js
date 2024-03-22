@@ -1,41 +1,34 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import DropdownMenu from './DropdownMenu';
 
 function MenuButtons({ classNames, menuItems = {}, icons = { plus: '', dots: '' } }) {
   const [isOpenDotsMenu, setIsOpenDotsMenu] = useState(false);
   const [isOpenPlusMenu, setIsOpenPlusMenu] = useState(false);
 
-  const buttons = [
-    {
-      id: 'plus',
-      icon: icons.plus,
-      menu: menuItems,
-      action: setIsOpenPlusMenu,
-      isOpen: isOpenPlusMenu,
-    },
-    {
-      id: 'dots',
-      icon: icons.dots,
-      menu: menuItems,
-      action: setIsOpenDotsMenu,
-      isOpen: isOpenDotsMenu,
-    },
-  ].filter((item) => Object.keys(menuItems).includes(item.id));
+  const buttons = Object.entries(menuItems)
+    .map(([id, menu]) => ({
+      id,
+      icon: icons[id],
+      menu,
+      action: id === 'plus' ? setIsOpenPlusMenu : setIsOpenDotsMenu,
+      isOpen: id === 'plus' ? isOpenPlusMenu : isOpenDotsMenu,
+    }))
+    .filter(({ id }) => !!icons[id]);
+
   return (
     <div className={classNames.container}>
-      {buttons.map((button) => (
-        <div key={button.id} className={classNames.buttonContainer}>
-          <button
-            className={classNames.button}
-            onClick={() => button.action((prev) => !prev)}
-          >
-            {button.icon}
+      {buttons.map(({ id, icon, menu, action, isOpen }) => (
+        <div key={id} className={classNames.buttonContainer}>
+          <button className={classNames.button} onClick={() => action((prev) => !prev)}>
+            {icon}
           </button>
           <DropdownMenu
-            menuItems={menuItems[button.id]}
+            menuItems={menu}
             classNames={classNames.dropdown}
-            isOpenMenu={button.isOpen}
-            setIsOpenMenu={button.action}
+            isOpenMenu={isOpen}
+            setIsOpenMenu={action}
           />
         </div>
       ))}
@@ -44,3 +37,22 @@ function MenuButtons({ classNames, menuItems = {}, icons = { plus: '', dots: '' 
 }
 
 export default MenuButtons;
+MenuButtons.propTypes = {
+  // An object representing CSS class names to be applied to the component elements.
+  classNames: PropTypes.shape({}),
+  // An object containing the items to be displayed in the menu of the component.
+  menuItems: PropTypes.shape({}),
+  // An object containing the URLs or names of icons to be used within the component, specifically for the plus and dots buttons.
+  icons: PropTypes.shape({
+    // The icon to represent an addition or expansion action
+    plus: PropTypes.string,
+    // The icon to represent a menu or more options action
+    dots: PropTypes.string,
+  }),
+};
+
+MenuButtons.defaultProps = {
+  classNames: {},
+  menuItems: {},
+  icons: { plus: '', dots: '' },
+};

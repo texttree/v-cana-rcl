@@ -8,12 +8,11 @@ let sections = [
     content: 'README.md',
   },
   {
-    name: 'Hooks example Block',
-    components: ['src/components/hooks/useWindowScrollPosition.jsx'],
-  },
-  {
-    name: 'PersonalNotes Block',
-    components: ['src/components/Notes/NoteEditor.js'],
+    name: 'NoteEditor Block',
+    components: [
+      'src/components/Notes/NoteEditor.js',
+      'src/components/Notes/MenuButtons.js',
+    ],
   },
 ];
 
