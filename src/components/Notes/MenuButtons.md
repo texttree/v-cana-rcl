@@ -2,7 +2,7 @@
 
 ```jsx
 import React, { useState, useEffect } from 'react';
-import { icons } from './examples.js';
+import { icons } from '../../../mocks/notesEditor.js';
 
 import MenuButtons from './MenuButtons';
 

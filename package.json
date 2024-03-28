@@ -1,7 +1,7 @@
 {
   "name": "@texttree/v-cana-rcl",
   "author": "TextTree.org",
-  "version": "0.1.2",
+  "version": "0.1.0",
   "description": "",
   "keywords": [
     "rcl",
@@ -32,7 +32,7 @@
   },
   "scripts": {
     "build": "styleguidist build",
-    "start": "styleguidist server",
+    "start": "yarn test && styleguidist server",
     "lint": "eslint --fix .",
     "precommit": "lint-staged",
     "prepare": "husky",

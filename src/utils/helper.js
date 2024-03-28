@@ -33,10 +33,9 @@ export const generateUniqueId = (existingIds) => {
 };
 
 export const exportNotes = (notes) => {
-  console.log({ notes });
   try {
     if (!notes || !notes.length) {
-      throw new Error(t('error:NoData'));
+      throw new Error('No data');
     }
     const transformedData = formationJSONToTree(notes);
     const jsonContent = JSON.stringify(
@@ -64,34 +63,46 @@ export const exportNotes = (notes) => {
 
     URL.revokeObjectURL(url);
   } catch (error) {
-    console.log(error);
     return error;
   }
 };
 
+/**
+ * Removes specific IDs from the given item and its children recursively.
+ *
+ * @param {object} item - The item from which to remove IDs.
+ * @return {void}
+ */
+const removeIdsFromItem = (item) => {
+  delete item.id;
+  delete item.parent_id;
+  delete item?.user_id;
+  delete item?.project_id;
+
+  item?.data?.blocks?.forEach((block) => delete block.id);
+  item?.children.forEach(removeIdsFromItem);
+};
+
+/**
+ * Removes ids from a tree structure.
+ *
+ * @param {Array} tree - the tree structure to remove ids from
+ * @return {Array} the tree structure with ids removed
+ */
 export const removeIdsFromTree = (tree) => {
   if (!tree) {
     return [];
   }
-  function removeIdsFromItem(item) {
-    delete item.id;
-    delete item.parent_id;
-    delete item?.user_id;
-    delete item?.project_id;
-
-    item?.data?.blocks?.forEach((block) => delete block.id);
-    item.children.forEach((child) => removeIdsFromItem(child));
-  }
-
-  if (!tree) {
-    return;
-  }
-
-  tree.forEach((item) => removeIdsFromItem(item));
-
+  tree.forEach(removeIdsFromItem);
   return tree;
 };
 
+/**
+ * Converts a JSON formation into a tree structure and removes the IDs from the tree.
+ *
+ * @param {Object} data - The JSON formation data to be converted into a tree.
+ * @return {Object} The transformed tree data with IDs removed.
+ */
 export function formationJSONToTree(data) {
   const treeData = buildTree(data);
   const transformedData = removeIdsFromTree(treeData);
@@ -122,10 +133,6 @@ export const buildTree = (items) => {
       const parentItem = itemMap[item.parent_id];
       if (parentItem) {
         parentItem.children.push(item);
-      } else {
-        console.error(
-          `Parent item with id ${item.parent_id} not found for item with id ${item.id}`
-        );
       }
     } else {
       tree.push(item);
@@ -135,6 +142,14 @@ export const buildTree = (items) => {
   return tree;
 };
 
+/**
+ * Imports notes from a JSON file and adds them to the user's personal notes.
+ *
+ * @param {Object} user - The user object containing the user's ID and deletion status.
+ * @param {Function} bulkNode - The function to add notes in bulk.
+ * @param {Array} notes - The array of existing notes.
+ * @return {Promise<Error|undefined>} - Returns an error if there was an issue with importing the notes, otherwise undefined.
+ */
 export const importNotes = async (user, bulkNode, notes) => {
   const fileInput = document.createElement('input');
   fileInput.type = 'file';
@@ -143,17 +158,17 @@ export const importNotes = async (user, bulkNode, notes) => {
     try {
       const file = event.target.files[0];
       if (!file) {
-        throw new Error('NoFileSelected');
+        throw new Error('No File Selected');
       }
 
       const fileContents = await file.text();
       if (!fileContents.trim()) {
-        throw new Error('EmptyFileContent');
+        throw new Error('Empty file content');
       }
 
       const importedData = JSON.parse(fileContents);
       if (importedData.type !== 'personal_notes') {
-        throw new Error('ContentError');
+        throw new Error('Content error');
       }
       const parsedNotes = parseNotesWithTopFolder(
         importedData.data,

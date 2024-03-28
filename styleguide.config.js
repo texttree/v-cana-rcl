@@ -8,9 +8,9 @@ let sections = [
     content: 'README.md',
   },
   {
-    name: 'NoteEditor Block',
+    name: 'NotesEditor Block',
     components: [
-      'src/components/Notes/NoteEditor.js',
+      'src/components/Notes/NotesEditor.js',
       'src/components/Notes/MenuButtons.js',
     ],
   },

@@ -1,13 +1,16 @@
+NotesEditor allows work with the user's notes.
+In V-cana app it is PersonalNotes and TeamNotes.
+
 ### Default example
 
 ```jsx
 import React, { useState, useEffect } from 'react';
-import { notes, icons, classes } from './examples.js';
+import { notes, icons, classes } from '../../../mocks/notesEditor.js';
 import {
   generateUniqueId,
   exportNotes,
   importNotes,
-  NoteEditor,
+  NotesEditor,
   MenuButtons,
 } from '@texttree/v-cana-rcl';
 import Modal from '../Modal/Modal.js';
@@ -82,7 +85,7 @@ function Component() {
     const title = isFolder ? 'New folder' : 'New note';
     const data = {
       blocks: [],
-      version: '2.27.2',
+      version: '2.29.1',
     };
     const insertData = {
       id,
@@ -97,7 +100,7 @@ function Component() {
   };
   const handleRenameNode = (newTitle, id) => {
     if (!newTitle.trim()) {
-      newTitle = 'EmptyTitle';
+      newTitle = 'Empty title';
     }
 
     const noteToRename = databaseNotes.find((note) => note.id === id);
@@ -106,8 +109,6 @@ function Component() {
       const filtered = databaseNotes.filter((note) => note.id !== id);
       const newAr = [...filtered, noteToRename];
       setDatabaseNotes(newAr);
-    } else {
-      console.log('Note with id ' + id + ' not found.');
     }
   };
   const handleRename = () => {
@@ -180,7 +181,7 @@ function Component() {
         id: 'remove',
         buttonContent: (
           <span className="flex items-center gap-2.5 py-1 pr-7 pl-2.5">
-            {icons.removeIcon || ''} {'RemoveAll'}
+            {icons.removeIcon || ''} {'Remove all'}
           </span>
         ),
         action: () => {
@@ -220,8 +221,8 @@ function Component() {
     return () => {
       clearTimeout(timer);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeNote]);
+
   const removeNode = () => {
     if (currentNodeProps) {
       const newNotes = [...databaseNotes];
@@ -274,7 +275,7 @@ function Component() {
           icons={icons}
         />
       </div>
-      <NoteEditor
+      <NotesEditor
         notes={databaseNotes}
         handleDragDrop={handleDragDrop}
         setActiveNote={setActiveNote}

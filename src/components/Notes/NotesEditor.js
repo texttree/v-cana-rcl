@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Redactor, TreeView, ContextMenu } from '@texttree/notepad-rcl';
 import { convertNotesToTree } from '../../utils/helper';
 
-const NoteEditor = ({
+const NotesEditor = ({
   activeNote,
   notes,
   selectedNodeId,
@@ -22,6 +22,7 @@ const NoteEditor = ({
   handleDragDrop,
   handleBack,
   placeholderRedactor,
+  placeholderSearch,
   emptyTitle,
 }) => {
   const [notesTreeview, setNotesTreeview] = useState(notes);
@@ -54,7 +55,7 @@ const NoteEditor = ({
                 className={classes.search.input}
                 value={term}
                 onChange={(event) => setTerm(event.target.value)}
-                placeholder={'Search'}
+                placeholder={placeholderSearch}
               />
               {term && (
                 <div className={classes.search.close} onClick={() => setTerm('')}>
@@ -121,9 +122,9 @@ const NoteEditor = ({
     </div>
   );
 };
-export default NoteEditor;
+export default NotesEditor;
 
-NoteEditor.defaultProps = {
+NotesEditor.defaultProps = {
   activeNote: null,
   setActiveNote: () => {},
   notes: [],
@@ -143,9 +144,10 @@ NoteEditor.defaultProps = {
   classes: {},
   placeholderRedactor: 'Text new note',
   emptyTitle: 'Empty title',
+  placeholderSearch: 'Search',
 };
 
-NoteEditor.propTypes = {
+NotesEditor.propTypes = {
   // The active note object.
   activeNote: PropTypes.object,
   // Function to set the active note.
@@ -196,4 +198,6 @@ NoteEditor.propTypes = {
   isSearch: PropTypes.bool,
   // Function to handle navigating back.
   handleBack: PropTypes.func,
+  // Placeholder text for the search input.
+  placeholderSearch: PropTypes.string,
 };

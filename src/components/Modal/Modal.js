@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { Transition, Dialog } from '@headlessui/react';
+import PropTypes from 'prop-types';
 
 function Modal({
   title,
@@ -65,3 +66,27 @@ function Modal({
   );
 }
 export default Modal;
+
+Modal.propTypes = {
+  // The title of the modal
+  title: PropTypes.string.isRequired,
+  // Indicates whether the modal is open or not.
+  isOpen: PropTypes.bool.isRequired,
+  // The content of the modal.
+  children: PropTypes.node.isRequired,
+  // The function to handle closing the modal.
+  closeHandle: PropTypes.func.isRequired,
+  // The class names for the modal. Defaults to an empty object.
+  className: PropTypes.object,
+  //Indicates whether the modal close action is disabled or not. Defaults to false.
+  handleCloseDisabled: PropTypes.bool,
+};
+
+Modal.defaultProps = {
+  title: '',
+  isOpen: false,
+  children: null,
+  closeHandle: () => {},
+  className: {},
+  handleCloseDisabled: false,
+};
