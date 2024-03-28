@@ -237,10 +237,43 @@ export const icons = {
   close,
   left,
 };
-
+export const simpleNotes = [
+  {
+    id: '1',
+    title: 'first note',
+    user_id: 1,
+    created_at: new Date('2024-03-29 07:59:58.3642'),
+    is_folder: false,
+    parent_id: null,
+  },
+  {
+    id: '2',
+    title: 'second note',
+    user_id: 1,
+    created_at: new Date('2024-03-29 07:59:58.3642'),
+    is_folder: false,
+    parent_id: null,
+  },
+  {
+    id: '3',
+    title: 'third note',
+    user_id: 1,
+    created_at: new Date('2024-03-29 07:59:58.3642'),
+    is_folder: false,
+    parent_id: null,
+  },
+];
 export const notes = [
   {
-    id: 'first_note_key_from_DB',
+    id: '001',
+    title: 'folder1',
+    user_id: 1,
+    created_at: new Date('2024-03-29 07:59:58.3642'),
+    is_folder: true,
+    parent_id: null,
+  },
+  {
+    id: '002',
     title: 'note1',
     user_id: 1,
     data: {
@@ -258,10 +291,10 @@ export const notes = [
     },
     created_at: new Date('2024-03-29 07:59:58.3642'),
     is_folder: false,
-    parent_id: 'second_note_key_from_DB',
+    parent_id: null,
   },
   {
-    id: 'second_note_key_from_DB',
+    id: '003',
     user_id: 1,
     title: 'note2',
     data: {
@@ -278,8 +311,29 @@ export const notes = [
       version: '2.29.1',
     },
     created_at: new Date('2024-03-28 07:59:58.3642'),
-    is_folder: true,
+    is_folder: false,
     parent_id: null,
+  },
+  {
+    id: '004',
+    user_id: 1,
+    title: 'note3',
+    data: {
+      time: 1550476186479,
+      blocks: [
+        {
+          id: 'zbGZFPM-iI',
+          type: 'paragraph',
+          data: {
+            text: 'This note inside folder',
+          },
+        },
+      ],
+      version: '2.29.1',
+    },
+    created_at: new Date('2024-03-28 07:59:58.3642'),
+    is_folder: false,
+    parent_id: '001',
   },
 ];
 
@@ -300,4 +354,46 @@ export const classes = {
     container: 'relative flex items-center mb-4',
     close: 'absolute р-6 w-6 right-1 z-10 cursor-pointer',
   },
+};
+export const style = {
+  nodeWrapper: {
+    lineHeight: '47px',
+    fontSize: '18px',
+    cursor: 'pointer',
+    paddingLeft: '20px',
+    paddingRight: '20px',
+    borderRadius: '10px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    backgroundColor: '#EDEDED',
+    hoveredColor: '#D5D5D5',
+    selectedColor: '#bdbdbd',
+  },
+  nodeTextBlock: { alignItems: 'center' },
+  nodeButtonBlock: { display: 'flex', alignItems: 'center', gap: '7px' },
+  searchContainer: {
+    position: 'relative',
+    marginBottom: '20px',
+    maxWidth: '500px',
+  },
+  searchInput: {
+    border: '0',
+    borderBottom: '1px solid #555',
+    background: 'transparent',
+    width: '100%',
+    padding: '24px 0 5px 0',
+    fontSize: '14px',
+    outline: 'none',
+  },
+  searchLabel: {
+    position: 'absolute',
+    top: '0px',
+    left: '0px',
+    fontSize: '14px',
+    color: '#555',
+    transition: 'all 0.5s ease-in-out',
+  },
+  renameButton: { paddingLeft: '30px' },
+  removeButton: { paddingLeft: '5px' },
+  renameInput: { width: '120px' },
 };

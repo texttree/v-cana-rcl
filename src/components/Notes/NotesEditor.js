@@ -6,22 +6,23 @@ import { convertNotesToTree } from '../../utils/helper';
 const NotesEditor = ({
   activeNote,
   notes,
-  selectedNodeId,
   currentNodeProps,
-  setCurrentNodeProps,
-  setActiveNote,
-  setNoteId,
-  handleSaveNote,
-  icons,
-  noteId,
-  menuItems,
-  classes,
-  isSearch,
-  handleRemoveNode,
-  handleRenameNode,
+  selectedNodeId,
   handleDragDrop,
-  handleBack,
+  setActiveNote,
+  setCurrentNodeProps,
+  handleRenameNode,
+  handleSaveNote,
+  handleRemoveNode,
+  icons,
+  setSelectedNodeId,
+  menuItems,
+  isSearch,
+  classes,
   placeholderRedactor,
+  style,
+  isContextMenu,
+  handleBack,
   placeholderSearch,
   emptyTitle,
 }) => {
@@ -66,11 +67,12 @@ const NotesEditor = ({
           )}
           <TreeView
             term={term}
-            selection={noteId}
+            style={style}
+            selection={selectedNodeId}
             handleDeleteNode={handleRemoveNode}
             classes={classes.treeView}
             data={notesTreeview}
-            setSelectedNodeId={setNoteId}
+            setSelectedNodeId={setSelectedNodeId}
             selectedNodeId={selectedNodeId}
             treeWidth={'w-full'}
             icons={icons}
@@ -83,18 +85,20 @@ const NotesEditor = ({
             handleDragDrop={handleDragDrop}
             openByDefault={false}
           />
-          <ContextMenu
-            setIsVisible={setIsShowMenu}
-            isVisible={isShowMenu}
-            nodeProps={currentNodeProps}
-            menuItems={menuItems.contextMenu}
-            clickMenuEvent={contextMenuEvent}
-            classes={{
-              menuItem: menuItems.item.className,
-              menuContainer: menuItems.container.className,
-              emptyMenu: 'p-2.5 cursor-pointer text-gray-300',
-            }}
-          />
+          {isContextMenu && (
+            <ContextMenu
+              setIsVisible={setIsShowMenu}
+              isVisible={isShowMenu}
+              nodeProps={currentNodeProps}
+              menuItems={menuItems.contextMenu}
+              clickMenuEvent={contextMenuEvent}
+              classes={{
+                menuItem: menuItems.item.className,
+                menuContainer: menuItems.container.className,
+                emptyMenu: 'p-2.5 cursor-pointer text-gray-300',
+              }}
+            />
+          )}
         </>
       ) : (
         <>
@@ -126,42 +130,43 @@ export default NotesEditor;
 
 NotesEditor.defaultProps = {
   activeNote: null,
-  setActiveNote: () => {},
   notes: [],
-  selectedNodeId: null,
-  handleDragDrop: () => {},
-  setCurrentNodeProps: () => {},
   currentNodeProps: {},
+  selectedNodeId: null,
+  handleDragDrop: null,
+  setActiveNote: () => {},
+  setCurrentNodeProps: () => {},
   handleRenameNode: () => {},
   handleSaveNote: () => {},
   handleRemoveNode: () => {},
   icons: {},
-  noteId: null,
-  setNoteId: () => {},
+  setSelectedNodeId: () => {},
   menuItems: {},
   isSearch: false,
-  handleBack: () => {},
   classes: {},
   placeholderRedactor: 'Text new note',
-  emptyTitle: 'Empty title',
+  style: {},
+  isContextMenu: false,
+  handleBack: () => {},
   placeholderSearch: 'Search',
+  emptyTitle: 'Empty title',
 };
 
 NotesEditor.propTypes = {
   // The active note object.
   activeNote: PropTypes.object,
-  // Function to set the active note.
-  setActiveNote: PropTypes.func,
   // Array of notes.
   notes: PropTypes.array,
+  // The current node's properties object.
+  currentNodeProps: PropTypes.object,
   // The ID of the selected node.
   selectedNodeId: PropTypes.number,
   // Function to handle drag and drop events.
   handleDragDrop: PropTypes.func,
+  // Function to set the active note.
+  setActiveNote: PropTypes.func,
   // Function to set the current node properties.
   setCurrentNodeProps: PropTypes.func,
-  // The current node's properties object.
-  currentNodeProps: PropTypes.object,
   // Function to handle renaming a node.
   handleRenameNode: PropTypes.func,
   // Function to save a note.
@@ -171,11 +176,12 @@ NotesEditor.propTypes = {
   // Object containing icons.
   icons: PropTypes.object,
   // The ID of the note.
-  noteId: PropTypes.string,
-  // Function to set the note ID.
-  setNoteId: PropTypes.func,
+  selectedNodeId: PropTypes.string,
+  // Function to set the selected node ID.
+  setSelectedNodeId: PropTypes.func,
   // Array of menu items.
   menuItems: PropTypes.object,
+  // An object containing CSS classes for different components.
   classes: PropTypes.shape({
     redactor: PropTypes.shape({
       title: PropTypes.string,
@@ -192,12 +198,16 @@ NotesEditor.propTypes = {
   }),
   // Placeholder text for the redactor input.
   placeholderRedactor: PropTypes.string,
-  // Text to display when the title is empty.
-  emptyTitle: PropTypes.string,
-  // Indicates if the component is in search mode.
-  isSearch: PropTypes.bool,
+  // Custom styles for the component.
+  style: PropTypes.object,
+  // Indicates if the component is in a context menu.
+  isContextMenu: PropTypes.bool,
   // Function to handle navigating back.
   handleBack: PropTypes.func,
   // Placeholder text for the search input.
   placeholderSearch: PropTypes.string,
+  // Text to display when the title is empty.
+  emptyTitle: PropTypes.string,
+  // Indicates if the component is in search mode.
+  isSearch: PropTypes.bool,
 };

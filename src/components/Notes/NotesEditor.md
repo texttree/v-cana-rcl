@@ -2,6 +2,244 @@
 
 ## In V-cana app it is PersonalNotes and TeamNotes.
 
+### Minimal demo
+
+```jsx
+import React, { useState } from 'react';
+import { simpleNotes, icons } from '../../../mocks/notesEditor.js';
+import { NotesEditor } from '@texttree/v-cana-rcl';
+
+function Component() {
+  const [currentNodeProps, setCurrentNodeProps] = useState(null);
+  const [databaseNotes, setDatabaseNotes] = useState(simpleNotes);
+  const [activeNote, setActiveNote] = useState();
+  const [noteId, setNoteId] = useState();
+
+  const handleSaveNote = () => {
+    const index = databaseNotes.findIndex((note) => note.id === noteId);
+    if (index !== -1) {
+      const updatedNotes = [...databaseNotes];
+      updatedNotes[index] = activeNote;
+      setDatabaseNotes(updatedNotes);
+    }
+  };
+
+  return (
+    <NotesEditor
+      notes={databaseNotes}
+      setActiveNote={setActiveNote}
+      activeNote={activeNote}
+      setCurrentNodeProps={setCurrentNodeProps}
+      currentNodeProps={currentNodeProps}
+      icons={icons}
+      handleSaveNote={handleSaveNote}
+    />
+  );
+}
+<Component />;
+```
+
+### Drag & drop demo
+
+```jsx
+import React, { useState } from 'react';
+import { notes, icons } from '../../../mocks/notesEditor.js';
+import { NotesEditor } from '@texttree/v-cana-rcl';
+
+function Component() {
+  const [currentNodeProps, setCurrentNodeProps] = useState(null);
+  const [databaseNotes, setDatabaseNotes] = useState(notes);
+  const [activeNote, setActiveNote] = useState();
+  const [noteId, setNoteId] = useState();
+  const handleDragDrop = ({ dragIds, parentId, index }) => {
+    moveNode({ dragIds, parentId, index });
+  };
+  const moveNode = ({ dragIds, parentId, index }) => {
+    const draggedNode = databaseNotes.find((node) => node.id === dragIds[0]);
+    if (!draggedNode || index < 0) {
+      return;
+    }
+    const newSorting = index;
+    const oldSorting = draggedNode.sorting;
+    const newParentId = parentId;
+    const oldParentId = draggedNode.parent_id;
+    const filtered = databaseNotes.filter((note) => note.id !== dragIds[0]);
+    if (parentId === oldParentId) {
+      if (newSorting === oldSorting || index < 0) {
+        return;
+      }
+      const sorted = filtered.map((note) => {
+        const isIncreasing = newSorting > oldSorting;
+        const isInRange = isIncreasing
+          ? note.sorting < newSorting &&
+            note.sorting > oldSorting &&
+            note.parent_id === parentId
+          : note.sorting >= newSorting &&
+            note.sorting < oldSorting &&
+            note.parent_id === parentId;
+        draggedNode.sorting = isIncreasing ? index - 1 : index;
+        return isInRange
+          ? { ...note, sorting: isIncreasing ? note.sorting - 1 : note.sorting + 1 }
+          : note;
+      });
+      setDatabaseNotes(sorted.concat(draggedNode));
+    } else {
+      draggedNode.parent_id = parentId;
+      draggedNode.sorting = index;
+      const sorted = filtered.map((note) => {
+        if (note.parent_id === oldParentId && note.sorting > oldSorting) {
+          return { ...note, sorting: note.sorting - 1 };
+        } else if (note.parent_id === newParentId && note.sorting >= newSorting) {
+          return { ...note, sorting: note.sorting + 1 };
+        }
+        return note;
+      });
+      setDatabaseNotes(sorted.concat(draggedNode));
+    }
+  };
+  const handleSaveNote = () => {
+    const index = databaseNotes.findIndex((note) => note.id === noteId);
+    if (index !== -1) {
+      const updatedNotes = [...databaseNotes];
+      updatedNotes[index] = activeNote;
+      setDatabaseNotes(updatedNotes);
+    }
+  };
+  return (
+    <NotesEditor
+      notes={databaseNotes}
+      handleDragDrop={handleDragDrop}
+      setActiveNote={setActiveNote}
+      activeNote={activeNote}
+      setCurrentNodeProps={setCurrentNodeProps}
+      currentNodeProps={currentNodeProps}
+      icons={icons}
+      handleSaveNote={handleSaveNote}
+    />
+  );
+}
+<Component />;
+```
+
+### Manage data
+
+```jsx
+import React, { useState } from 'react';
+import { notes, icons } from '../../../mocks/notesEditor.js';
+import { generateUniqueId } from '../../utils/helper.js';
+
+import { NotesEditor } from '@texttree/v-cana-rcl';
+
+function Component() {
+  const [currentNodeProps, setCurrentNodeProps] = useState(null);
+  const [selectedNodeId, setSelectedNodeId] = useState(null);
+  const [databaseNotes, setDatabaseNotes] = useState(notes);
+  const [activeNote, setActiveNote] = useState();
+  const [noteId, setNoteId] = useState();
+
+  const handleSaveNote = () => {
+    const index = databaseNotes.findIndex((note) => note.id === noteId);
+    if (index !== -1) {
+      const updatedNotes = [...databaseNotes];
+      updatedNotes[index] = activeNote;
+      setDatabaseNotes(updatedNotes);
+    }
+  };
+  const addNode = (isFolder = false) => {
+    const id = generateUniqueId([]);
+    const title = isFolder ? 'New folder' : 'New note';
+    const data = {
+      blocks: [],
+      version: '2.29.1',
+    };
+    const insertData = {
+      id,
+      user_id: 1,
+      title,
+      is_folder: isFolder,
+      parent_id: null,
+    };
+    const newDataBaseNotes = [...databaseNotes];
+    newDataBaseNotes.push(insertData);
+    setDatabaseNotes(newDataBaseNotes);
+  };
+  const removeNode = (id) => {
+    const newNotes = [...databaseNotes];
+    setDatabaseNotes(newNotes.filter((note) => note.id !== id));
+  };
+  return (
+    <>
+      <NotesEditor
+        notes={databaseNotes}
+        setActiveNote={setActiveNote}
+        activeNote={activeNote}
+        setCurrentNodeProps={setCurrentNodeProps}
+        currentNodeProps={currentNodeProps}
+        icons={icons}
+        handleSaveNote={handleSaveNote}
+        selectedNodeId={noteId}
+        setSelectedNodeId={setNoteId}
+        style={{
+          nodeWrapper: {
+            hoveredColor: '#D5D5D5',
+            selectedColor: '#bdbdbd',
+          },
+        }}
+      />
+      <button className="p-2 bg-gray-300 rounded-lg mr-2" onClick={() => addNode()}>
+        Add note
+      </button>
+      <button className="p-2 bg-gray-300 rounded-lg mr-2" onClick={() => addNode(true)}>
+        Add folder
+      </button>
+      <button className="p-2 bg-gray-300 rounded-lg" onClick={() => removeNode(noteId)}>
+        Delete selected node
+      </button>
+    </>
+  );
+}
+<Component />;
+```
+
+### Search
+
+```jsx
+import React, { useState } from 'react';
+import { simpleNotes, icons, classes } from '../../../mocks/notesEditor.js';
+import { NotesEditor } from '@texttree/v-cana-rcl';
+
+function Component() {
+  const [currentNodeProps, setCurrentNodeProps] = useState(null);
+  const [databaseNotes, setDatabaseNotes] = useState(simpleNotes);
+  const [activeNote, setActiveNote] = useState();
+  const [noteId, setNoteId] = useState();
+
+  const handleSaveNote = () => {
+    const index = databaseNotes.findIndex((note) => note.id === noteId);
+    if (index !== -1) {
+      const updatedNotes = [...databaseNotes];
+      updatedNotes[index] = activeNote;
+      setDatabaseNotes(updatedNotes);
+    }
+  };
+
+  return (
+    <NotesEditor
+      notes={databaseNotes}
+      setActiveNote={setActiveNote}
+      activeNote={activeNote}
+      setCurrentNodeProps={setCurrentNodeProps}
+      currentNodeProps={currentNodeProps}
+      icons={icons}
+      handleSaveNote={handleSaveNote}
+      classes={classes}
+      isSearch
+    />
+  );
+}
+<Component />;
+```
+
 ### Basic demo
 
 ```jsx
