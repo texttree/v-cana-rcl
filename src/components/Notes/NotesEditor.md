@@ -1,6 +1,4 @@
-## NotesEditor allows work with the user's notes.
-
-## In V-cana app it is PersonalNotes and TeamNotes.
+### NotesEditor allows work with the user's notes.
 
 ### Minimal demo
 
@@ -240,6 +238,177 @@ function Component() {
 <Component />;
 ```
 
+### Context Menu
+
+```jsx
+import React, { useState } from 'react';
+import { simpleNotes, icons, classes } from '../../../mocks/notesEditor.js';
+import { generateUniqueId, NotesEditor } from '@texttree/v-cana-rcl';
+
+function Component() {
+  const [currentNodeProps, setCurrentNodeProps] = useState(null);
+  const [databaseNotes, setDatabaseNotes] = useState(simpleNotes);
+  const [activeNote, setActiveNote] = useState();
+  const [noteId, setNoteId] = useState();
+
+  const handleSaveNote = () => {
+    const index = databaseNotes.findIndex((note) => note.id === noteId);
+    if (index !== -1) {
+      const updatedNotes = [...databaseNotes];
+      updatedNotes[index] = activeNote;
+      setDatabaseNotes(updatedNotes);
+    }
+  };
+  const menuItems = {
+    contextMenu: [
+      {
+        id: 'adding_note',
+        buttonContent: (
+          <span className="flex items-center gap-2.5 py-1 pr-7 pl-2.5">
+            {icons.file || ''} {'New note'}
+          </span>
+        ),
+        action: () => addNode(),
+      },
+      {
+        id: 'adding_folder',
+        buttonContent: (
+          <span className="flex items-center gap-2.5 py-1 pr-7 pl-2.5">
+            {icons.closeFolder || ''} {'New folder'}
+          </span>
+        ),
+        action: () => addNode(true),
+      },
+      {
+        id: 'rename',
+        buttonContent: (
+          <span className="flex items-center gap-2.5 py-1 pr-7 pl-2.5">
+            {icons.file || ''} {'Rename'}
+          </span>
+        ),
+        action: () => handleRename(),
+      },
+      {
+        id: 'delete',
+        buttonContent: (
+          <span className="flex items-center gap-2.5 py-1 pr-7 pl-2.5">
+            {icons.removeIcon || ''} {'Delete'}
+          </span>
+        ),
+        action: () => removeNode(),
+      },
+    ],
+    menu: [
+      {
+        id: 'export',
+        buttonContent: (
+          <span className="flex items-center gap-2.5 py-1 pr-7 pl-2.5">
+            {icons.exportIcon || ''} {'Export'}
+          </span>
+        ),
+        action: () => exportNotes(databaseNotes),
+      },
+      {
+        id: 'import',
+        buttonContent: (
+          <span className="flex items-center gap-2.5 py-1 pr-7 pl-2.5">
+            {icons.importIcon || ''} {'Import'}
+          </span>
+        ),
+        action: () => importNotes({ id: 1, deleted_at: null }, bulkNode, databaseNotes),
+      },
+      {
+        id: 'remove',
+        buttonContent: (
+          <span className="flex items-center gap-2.5 py-1 pr-7 pl-2.5">
+            {icons.removeIcon || ''} {'Remove all'}
+          </span>
+        ),
+        action: () => {
+          setCurrentNodeProps(null);
+          setIsOpenModal(true);
+        },
+      },
+    ],
+    container: {
+      className: 'absolute border rounded z-[100] whitespace-nowrap bg-white shadow',
+    },
+    item: {
+      className: 'cursor-pointer bg-th-secondary-100 hover:bg-th-secondary-200',
+    },
+  };
+  const addNode = (isFolder = false) => {
+    const id = generateUniqueId([]);
+    const title = isFolder ? 'New folder' : 'New note';
+    const data = {
+      blocks: [],
+      version: '2.29.1',
+    };
+    const insertData = {
+      id,
+      user_id: 1,
+      title,
+      is_folder: isFolder,
+      parent_id: null,
+    };
+    const newDataBaseNotes = [...databaseNotes];
+    newDataBaseNotes.push(insertData);
+    setDatabaseNotes(newDataBaseNotes);
+  };
+  const handleRenameNode = (newTitle, id) => {
+    console.log(newTitle, id);
+    if (!newTitle.trim()) {
+      newTitle = 'Empty title';
+    }
+
+    const noteToRename = databaseNotes.find((note) => note.id === id);
+    if (noteToRename) {
+      noteToRename.title = newTitle;
+      const filtered = databaseNotes.filter((note) => note.id !== id);
+      const newAr = [...filtered, noteToRename];
+      setDatabaseNotes(newAr);
+    }
+  };
+  const handleRename = () => {
+    currentNodeProps.node.edit();
+  };
+  const removeNode = () => {
+    if (currentNodeProps) {
+      const newNotes = [...databaseNotes];
+      setDatabaseNotes(newNotes.filter((note) => note.id !== currentNodeProps.node.id));
+    }
+  };
+  const handleRemoveNode = ({ ids }) => {
+    if (currentNodeProps) {
+      if (ids && ids.length) {
+        setDatabaseNotes(databaseNotes.filter((el) => !ids.includes(el.id)));
+      } else {
+        setDatabaseNotes(
+          databaseNotes.filter((el) => el.id !== currentNodeProps.node.id)
+        );
+      }
+    }
+  };
+
+  return (
+    <NotesEditor
+      notes={databaseNotes}
+      setActiveNote={setActiveNote}
+      activeNote={activeNote}
+      setCurrentNodeProps={setCurrentNodeProps}
+      currentNodeProps={currentNodeProps}
+      icons={icons}
+      handleSaveNote={handleSaveNote}
+      handleRenameNode={handleRenameNode}
+      classes={classes}
+      menuItems={menuItems}
+      isContextMenu
+    />
+  );
+}
+<Component />;
+```
+
 ### Basic demo
 
 ```jsx
@@ -454,7 +623,6 @@ function Component() {
       return;
     }
     const timer = setTimeout(() => {
-      console.log('save');
       handleSaveNote();
     }, 2000);
     return () => {
@@ -531,6 +699,7 @@ function Component() {
         isSearch
         handleBack={handleBack}
         handleSaveNote={handleSaveNote}
+        isContextMenu
       />
       <Modal isOpen={isOpenModal} closeHandle={() => setIsOpenModal(false)}>
         <div className="flex flex-col gap-7 items-center">

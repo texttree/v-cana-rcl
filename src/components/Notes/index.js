@@ -1,3 +1,1 @@
-export * from './NotesEditor';
-export * from './MenuButtons';
-export * from './DropdownMenu';
+export * from './Notes';

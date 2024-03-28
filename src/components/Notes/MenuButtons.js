@@ -45,9 +45,9 @@ MenuButtons.propTypes = {
   // An object containing the URLs or names of icons to be used within the component, specifically for the plus and dots buttons.
   icons: PropTypes.shape({
     // The icon to represent an addition or expansion action
-    plus: PropTypes.string,
+    plus: PropTypes.node,
     // The icon to represent a menu or more options action
-    dots: PropTypes.string,
+    dots: PropTypes.node,
   }),
 };
 
