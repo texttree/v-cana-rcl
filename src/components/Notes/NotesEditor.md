@@ -1,7 +1,8 @@
-NotesEditor allows work with the user's notes.
-In V-cana app it is PersonalNotes and TeamNotes.
+## NotesEditor allows work with the user's notes.
 
-### Default example
+## In V-cana app it is PersonalNotes and TeamNotes.
+
+### Basic demo
 
 ```jsx
 import React, { useState, useEffect } from 'react';

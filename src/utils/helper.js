@@ -3,15 +3,15 @@
  *
  * @param {Array} notes - The array of notes to convert.
  * @param {string|null} parentId - The ID of the parent node. Default is null.
- * @return {Array|null} The tree structure of the notes, or null if there are no filtered notes.
+ * @return {Array} The tree structure of the notes, or [] if there are no filtered notes.
  */
 export const convertNotesToTree = (notes = [], parentId = null) => {
   if (!Array.isArray(notes)) {
     return [];
   }
-  const filteredNotes = notes.filter((note) => note?.parent_id === parentId);
+  const filteredNotes = notes.filter((note) => note.parent_id === parentId);
   if (filteredNotes?.length === 0) {
-    return null;
+    return [];
   }
   filteredNotes.sort((a, b) => a?.sorting - b?.sorting);
   const newNotes = filteredNotes.map((note) => ({

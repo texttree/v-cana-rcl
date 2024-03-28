@@ -258,7 +258,7 @@ export const notes = [
     },
     created_at: new Date('2024-03-29 07:59:58.3642'),
     is_folder: false,
-    parent_id: null,
+    parent_id: 'second_note_key_from_DB',
   },
   {
     id: 'second_note_key_from_DB',
@@ -278,7 +278,7 @@ export const notes = [
       version: '2.29.1',
     },
     created_at: new Date('2024-03-28 07:59:58.3642'),
-    is_folder: false,
+    is_folder: true,
     parent_id: null,
   },
 ];

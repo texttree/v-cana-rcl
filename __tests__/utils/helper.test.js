@@ -10,17 +10,11 @@ import {
  * This function converts an array of notes into a tree structure.
  */
 describe('convertNotesToTree', () => {
-  it('should return null if no notes are present', () => {
-    expect(convertNotesToTree()).toBeNull();
-  });
-
-  it('should return null if no notes have the given parentId', () => {
-    const notes = [{ id: 1, parent_id: 2, title: 'test' }];
-    expect(convertNotesToTree(notes, 3)).toBeNull();
+  it('should return an empty array if no notes are present', () => {
+    expect(convertNotesToTree([])).toEqual([]);
   });
 
   it('should return an array of notes with the given parentId, sorted by sorting', () => {
-    // Arrange
     const notes = [
       { id: 1, parent_id: null, title: 'test1', sorting: 1, is_folder: true },
       { id: 2, parent_id: null, title: 'test2', sorting: 2 },
