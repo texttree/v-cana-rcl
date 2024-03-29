@@ -8,10 +8,10 @@ let sections = [
     content: 'README.md',
   },
   {
-    name: 'Button Block',
+    name: 'NotesEditor Block',
     components: [
-      'src/components/Button/Button.js',
-      'src/components/hooks/useWindowScrollPosition.jsx',
+      'src/components/Notes/NotesEditor.js',
+      'src/components/Notes/MenuButtons.js',
     ],
   },
 ];
@@ -29,6 +29,11 @@ module.exports = {
         {
           name: 'description',
           content: 'React component library template',
+        },
+      ],
+      scripts: [
+        {
+          src: 'https://cdn.tailwindcss.com',
         },
       ],
     },

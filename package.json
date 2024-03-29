@@ -1,7 +1,7 @@
 {
-  "name": "@texttree/template-rcl",
+  "name": "@texttree/v-cana-rcl",
   "author": "TextTree.org",
-  "version": "0.1.2",
+  "version": "0.1.0",
   "description": "",
   "keywords": [
     "rcl",
@@ -10,14 +10,14 @@
   "license": "MIT",
   "private": false,
   "main": "dist/index.js",
-  "url": "https://github.com/texttree/template-rcl",
-  "homepage": "https://github.com/texttree/template-rcl#readme",
+  "url": "https://github.com/texttree/v-cana-rcl",
+  "homepage": "https://github.com/texttree/v-cana-rcl#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/texttree/template-rcl.git"
+    "url": "git+https://github.com/texttree/v-cana-rcl.git"
   },
   "bugs": {
-    "url": "https://github.com/texttree/template-rcl/issues"
+    "url": "https://github.com/texttree/v-cana-rcl/issues"
   },
   "publishConfig": {
     "access": "public"
@@ -32,7 +32,7 @@
   },
   "scripts": {
     "build": "styleguidist build",
-    "start": "styleguidist server",
+    "start": "yarn test && styleguidist server",
     "lint": "eslint --fix .",
     "precommit": "lint-staged",
     "prepare": "husky",
@@ -83,5 +83,9 @@
     "react-styleguidist": "^13.1.2",
     "shx": "^0.3.4",
     "webpack": "^5.90.3"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.7.18",
+    "@texttree/notepad-rcl": "^2.4.1"
   }
 }

@@ -4,6 +4,7 @@
 __tests__/
 node_modules/
 src/
+mocks/
 .editorconfig
 .gitignore
 styleguide.config.js
