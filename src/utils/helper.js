@@ -24,47 +24,20 @@ export const convertNotesToTree = (notes = [], parentId = null) => {
   return newNotes;
 };
 
+/**
+ * Generates a unique ID by appending a random 9-character string to '000000000'
+ * and slicing the result to have length 9. The generated ID is guaranteed to be
+ * unique based on the provided array of existing IDs.
+ *
+ * @param {Array} existingIds - An array of existing IDs.
+ * @return {string} The generated unique ID.
+ */
 export const generateUniqueId = (existingIds) => {
   let newId;
   do {
     newId = ('000000000' + Math.random().toString(36).substring(2, 9)).slice(-9);
   } while (existingIds.includes(newId));
   return newId;
-};
-
-export const exportNotes = (notes) => {
-  try {
-    if (!notes || !notes.length) {
-      throw new Error('No data');
-    }
-    const transformedData = formationJSONToTree(notes);
-    const jsonContent = JSON.stringify(
-      { type: 'personal_notes', data: transformedData },
-      null,
-      2
-    );
-
-    const blob = new Blob([jsonContent], { type: 'application/json' });
-
-    const downloadLink = document.createElement('a');
-    const currentDate = new Date();
-    const formattedDate = currentDate.toISOString().split('T')[0];
-
-    const fileName = `personal_notes_${formattedDate}.json`;
-
-    const url = URL.createObjectURL(blob);
-
-    downloadLink.href = url;
-    downloadLink.download = fileName;
-
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-
-    URL.revokeObjectURL(url);
-  } catch (error) {
-    return error;
-  }
 };
 
 /**
@@ -143,52 +116,16 @@ export const buildTree = (items) => {
 };
 
 /**
- * Imports notes from a JSON file and adds them to the user's personal notes.
+ * Parses an array of notes and generates a new array with an additional top-level folder.
  *
- * @param {Object} user - The user object containing the user's ID and deletion status.
- * @param {Function} bulkNode - The function to add notes in bulk.
- * @param {Array} notes - The array of existing notes.
- * @return {Promise<Error|undefined>} - Returns an error if there was an issue with importing the notes, otherwise undefined.
+ * @param {Array} notes - The array of notes to be parsed.
+ * @param {string} user_id - The ID of the user.
+ * @param {string} deleted_at - The deletion timestamp.
+ * @param {Array} [allNotes=[]] - The array of all notes (optional).
+ * @return {Array} - The parsed notes array with an additional top-level folder.
  */
-export const importNotes = async (user, bulkNode, notes) => {
-  const fileInput = document.createElement('input');
-  fileInput.type = 'file';
-  fileInput.accept = '.json';
-  fileInput.addEventListener('change', async (event) => {
-    try {
-      const file = event.target.files[0];
-      if (!file) {
-        throw new Error('No File Selected');
-      }
 
-      const fileContents = await file.text();
-      if (!fileContents.trim()) {
-        throw new Error('Empty file content');
-      }
-
-      const importedData = JSON.parse(fileContents);
-      if (importedData.type !== 'personal_notes') {
-        throw new Error('Content error');
-      }
-      const parsedNotes = parseNotesWithTopFolder(
-        importedData.data,
-        user.id,
-        user.deleted_at,
-        notes.map((note) => note.id)
-      );
-
-      for (const note of parsedNotes) {
-        bulkNode(note);
-      }
-    } catch (error) {
-      return error;
-    }
-  });
-
-  fileInput.click();
-};
-
-const parseNotesWithTopFolder = (notes, user_id, deleted_at, allNotes = []) => {
+export const parseNotesWithTopFolder = (notes, user_id, deleted_at, allNotes = []) => {
   const exportFolderId = generateUniqueId(allNotes);
   const exportFolderDateTime = new Date().toISOString().replace(/[:.]/g, '-');
   const exportFolder = {
@@ -203,38 +140,53 @@ const parseNotesWithTopFolder = (notes, user_id, deleted_at, allNotes = []) => {
     parent_id: null,
     sorting: 0,
   };
-  const parseNotes = (notes, user_id, parentId = null, allNotes = []) => {
-    return notes.reduce((acc, note) => {
-      const id = generateUniqueId(allNotes);
-      const parsedNote = {
-        id: id,
-        user_id,
-        title: note.title,
-        data: parseData(note.data),
-        created_at: note.created_at,
-        changed_at: new Date().toISOString(),
-        deleted_at: note.deleted_at,
-        is_folder: note.is_folder,
-        parent_id: parentId,
-        sorting: note.sorting,
-      };
-      acc.push(parsedNote);
-      if (note.children?.length > 0) {
-        const childNotes = parseNotes(note.children, user_id, id);
-        acc = acc.concat(childNotes);
-      }
-      return acc;
-    }, []);
-  };
+
   const parsedNotes = parseNotes(notes, user_id, exportFolderId);
   return [exportFolder, ...parsedNotes];
 };
+/**
+ * Parses the notes recursively and generates unique IDs for each note.
+ *
+ * @param {Array} notes - The array of notes to be parsed.
+ * @param {string} user_id - The ID of the user associated with the notes.
+ * @param {string} parentId - The ID of the parent note. Defaults to null.
+ * @param {Array} allNotes - An array containing all parsed notes.
+ * @return {Array} An array of parsed notes with unique IDs and hierarchical structure.
+ */
+const parseNotes = (notes, user_id, parentId = null, allNotes = []) => {
+  return notes.reduce((acc, note) => {
+    const id = generateUniqueId(allNotes);
+    const parsedNote = {
+      id: id,
+      user_id,
+      title: note.title,
+      data: parseData(note.data),
+      created_at: note.created_at,
+      changed_at: new Date().toISOString(),
+      deleted_at: note.deleted_at,
+      is_folder: note.is_folder,
+      parent_id: parentId,
+      sorting: note.sorting,
+    };
+    acc.push(parsedNote);
+    if (note.children?.length > 0) {
+      const childNotes = parseNotes(note.children, user_id, id);
+      acc = acc.concat(childNotes);
+    }
+    return acc;
+  }, []);
+};
 
+/**
+ * Parse the given data object and extract specific fields.
+ *
+ * @param {Object} data - The data object to be parsed.
+ * @return {Object} An object containing 'blocks', 'version', and 'time' fields.
+ */
 const parseData = (data) => {
   if (!data) {
     return null;
   }
-
   return {
     blocks: data.blocks || [],
     version: data.version,
