@@ -86,6 +86,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.18",
-    "@texttree/notepad-rcl": "^2.4.1"
+    "@texttree/notepad-rcl": "^2.4.1",
+    "react-markdown": "^9.0.1"
   }
 }
