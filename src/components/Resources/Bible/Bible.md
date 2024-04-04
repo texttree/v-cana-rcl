@@ -37,7 +37,7 @@ function Component() {
           numVerse: 'mr-2',
           currentVerse: 'bg-gray-300 p-2 rounded-md',
         }}
-        toolName="simplified"
+        toolId="simplified"
       />
     </div>
   );

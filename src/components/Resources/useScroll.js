@@ -2,20 +2,19 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 function useScroll({
-  toolName,
+  toolId,
   isLoading,
-  idPrefix,
+  idVersePrefix,
   startScrollVerse,
   startHighlightIds,
   scrollTopOffset,
 }) {
   const [currentScrollVerse, setCurrentScrollVerse] = useState(startScrollVerse);
   const [highlightIds, setHighlightIds] = useState(startHighlightIds);
-
   useEffect(() => {
     setTimeout(() => {
-      const element = document.getElementById(idPrefix + currentScrollVerse);
-      const container = document.getElementById('container_' + toolName);
+      const element = document.getElementById(idVersePrefix + currentScrollVerse);
+      const container = document.getElementById('container_' + toolId);
       if (element && container) {
         container.scrollBy({
           top:
@@ -29,13 +28,12 @@ function useScroll({
 
   const handleSaveScroll = (verse, id) => {
     if (id) {
-      setHighlightIds((prev) => ({ ...prev, [toolName]: 'id' + id }));
+      setHighlightIds((prev) => ({ ...prev, [toolId]: 'id' + id }));
     }
     setCurrentScrollVerse(verse);
   };
-
   return {
-    highlightId: highlightIds[toolName],
+    highlightId: highlightIds[toolId],
     currentScrollVerse,
     handleSaveScroll,
   };
@@ -43,11 +41,11 @@ function useScroll({
 
 useScroll.propTypes = {
   // The name of the tool using this hook.
-  toolName: PropTypes.string,
+  toolId: PropTypes.string,
   // Indicates whether the content is still loading or not.
   isLoading: PropTypes.bool,
   // A string to prefix the verse id when looking up the scroll target.
-  idPrefix: PropTypes.string.isRequired,
+  idVersePrefix: PropTypes.string.isRequired,
   // The verse to initially scroll to.
   startScrollVerse: PropTypes.string,
   // Object with tool names and their corresponding highlight ids.
@@ -57,9 +55,9 @@ useScroll.propTypes = {
 };
 
 useScroll.defaultProps = {
-  toolName: 'default',
+  toolId: 'default',
   isLoading: false,
-  idPrefix: 'id',
+  idVersePrefix: 'id',
   startScrollVerse: '1',
   startHighlightIds: {},
   scrollTopOffset: 20,

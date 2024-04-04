@@ -8,15 +8,15 @@ function Bible({
   isLoading,
   isDraft,
   classes,
-  toolName,
+  toolId,
   startHighlightIds,
   startScrollVerse,
   hiddenVerses,
   nodeLoading,
 }) {
   const { handleSaveScroll, currentScrollVerse } = useScroll({
-    toolName,
-    idPrefix: toolName,
+    toolId,
+    idVersePrefix: toolId,
     isLoading,
     startHighlightIds,
     startScrollVerse,
@@ -34,7 +34,7 @@ function Bible({
             verseObject={verseObject}
             currentScrollVerse={currentScrollVerse}
             classes={classes}
-            toolName={toolName}
+            toolId={toolId}
             handleSaveScroll={handleSaveScroll}
             isDraft={isDraft}
             hiddenVerses={hiddenVerses}
@@ -54,7 +54,7 @@ Bible.propTypes = {
   // An object containing CSS classes for the component
   classes: PropTypes.object,
   // A string representing the name of the tool using this component
-  toolName: PropTypes.string,
+  toolId: PropTypes.string,
   // An object containing tool names and their corresponding highlight ids
   startHighlightIds: PropTypes.object,
   // A string representing the verse to initially scroll to
@@ -70,7 +70,7 @@ Bible.defaultProps = {
   isLoading: false,
   isDraft: false,
   classes: {},
-  toolName: 'default',
+  toolId: 'default',
   startHighlightIds: {},
   startScrollVerse: '1',
   hiddenVerses: [],

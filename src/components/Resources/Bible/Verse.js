@@ -6,7 +6,7 @@ function Verse({
   verseObject,
   currentScrollVerse,
   classes,
-  toolName,
+  toolId,
   handleSaveScroll,
   isDraft,
   hiddenVerses,
@@ -18,7 +18,7 @@ function Verse({
   } ${classes.verse}`;
   return (
     <div
-      id={toolName + verse}
+      id={toolId + verse}
       className={verseClassName}
       onClick={() => {
         handleSaveScroll(String(verse));
@@ -45,7 +45,7 @@ Verse.propTypes = {
   // CSS classes for the component.
   classes: PropTypes.object,
   // The name of the tool using this component.
-  toolName: PropTypes.string,
+  toolId: PropTypes.string,
   // The function to handle save scroll event.
   handleSaveScroll: PropTypes.func,
   // Indicates whether the text is a draft.
@@ -59,7 +59,7 @@ Verse.defaultProps = {
   isDraft: false,
   hiddenVerses: [],
   handleSaveScroll: () => {},
-  toolName: 'default',
+  toolId: 'default',
 };
 
 export default Verse;
