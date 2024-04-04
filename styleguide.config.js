@@ -8,12 +8,28 @@ let sections = [
     content: 'README.md',
   },
   {
+    name: 'Bible',
+    components: ['src/components/Resources/Bible/Bible.js'],
+  },
+  {
+    name: 'TN and TW',
+    components: [
+      'src/components/Resources/TNTW/TN.js',
+      'src/components/Resources/TNTW/TNContent.js',
+      'src/components/Resources/TNTW/TNList.js',
+    ],
+  },
+  {
     name: 'NotesEditor Block',
     components: [
       'src/components/Notes/NotesEditor.js',
       'src/components/Notes/MenuButtons.js',
     ],
   },
+  // {
+  //   name: 'Workspace Block',
+  //   components: ['src/components/Workspace/Workspace.js'],
+  // },
 ];
 
 module.exports = {

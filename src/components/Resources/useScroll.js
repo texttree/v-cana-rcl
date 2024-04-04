@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-export function useScroll({
+function useScroll({
   toolName,
   isLoading,
   idPrefix,
@@ -43,7 +43,7 @@ export function useScroll({
 
 useScroll.propTypes = {
   // The name of the tool using this hook.
-  toolName: PropTypes.string.isRequired,
+  toolName: PropTypes.string,
   // Indicates whether the content is still loading or not.
   isLoading: PropTypes.bool,
   // A string to prefix the verse id when looking up the scroll target.
@@ -57,8 +57,11 @@ useScroll.propTypes = {
 };
 
 useScroll.defaultProps = {
+  toolName: 'default',
   isLoading: false,
+  idPrefix: 'id',
   startScrollVerse: '1',
   startHighlightIds: {},
   scrollTopOffset: 20,
 };
+export default useScroll;

@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Verse from './Verse';
-import { useScroll } from './useScroll';
+import useScroll from '../useScroll';
 
 function Bible({
-  verseObjects = [],
-  isLoading = false,
-  isDraft = false,
-  classes = {},
-  toolName = 'default',
-  startHighlightIds = {},
-  startScrollVerse = '1',
-  hiddenVerses = [],
-  nodeLoading = <div>Loading...</div>,
+  verseObjects,
+  isLoading,
+  isDraft,
+  classes,
+  toolName,
+  startHighlightIds,
+  startScrollVerse,
+  hiddenVerses,
+  nodeLoading,
 }) {
   const { handleSaveScroll, currentScrollVerse } = useScroll({
     toolName,

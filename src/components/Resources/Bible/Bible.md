@@ -5,7 +5,7 @@
 ```jsx
 import React from 'react';
 import { Bible } from '@texttree/v-cana-rcl';
-import { literal } from '../../../mocks/resources/parsed/literal.js';
+import { literal } from '../../../../mocks/resources/parsed/literal.js';
 function Component() {
   return (
     <div className="h-64 overflow-y-scroll white">
@@ -26,7 +26,7 @@ function Component() {
 ```jsx
 import React from 'react';
 import { Bible } from '@texttree/v-cana-rcl';
-import { literal } from '../../../mocks/resources/parsed/literal.js';
+import { literal } from '../../../../mocks/resources/parsed/literal.js';
 function Component() {
   return (
     <div className="h-64 overflow-y-scroll" id="container_simplified">
@@ -50,7 +50,7 @@ function Component() {
 ```jsx
 import React from 'react';
 import { Bible } from '@texttree/v-cana-rcl';
-import { literal } from '../../../mocks/resources/parsed/literal.js';
+import { literal } from '../../../../mocks/resources/parsed/literal.js';
 function Component() {
   return (
     <Bible
