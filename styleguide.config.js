@@ -12,11 +12,19 @@ let sections = [
     components: ['src/components/Resources/Bible/Bible.js'],
   },
   {
-    name: 'TN and TW',
+    name: 'TNotes',
     components: [
       'src/components/Resources/TNTW/TN.js',
       'src/components/Resources/TNTW/TNContent.js',
       'src/components/Resources/TNTW/TNList.js',
+    ],
+  },
+  {
+    name: 'TQuestions',
+    components: [
+      'src/components/Resources/TQ/Question.js',
+      'src/components/Resources/TQ/QuestionList.js',
+      'src/components/Resources/TQ/TQ.js',
     ],
   },
   {
