@@ -46,7 +46,7 @@ function TN({
     </>
   );
 }
-TNList.propTypes = {
+TN.propTypes = {
   // Object containing translation notes
   tnotes: PropTypes.object,
   // Boolean to indicate if the component is in a loading state
@@ -60,20 +60,24 @@ TNList.propTypes = {
   // The offset for scrolling to the top
   scrollTopOffset: PropTypes.number,
   // Styles for different parts of the component
-  classes: PropTypes.shape,
+  classes: PropTypes.shape({
+    main: PropTypes.string,
+    content: PropTypes.object,
+    list: PropTypes.object,
+  }),
   // The element to display when loading
   nodeLoading: PropTypes.element,
   // The element to display as the content back button
   nodeContentBack: PropTypes.element,
 };
-TNList.defaultProps = {
+TN.defaultProps = {
   tnotes: {},
   isLoading: false,
   toolId: 'tn',
   startHighlightIds: {},
   startScrollVerse: '0',
   scrollTopOffset: 20,
-  classes: { main: '', content: '', list: '' },
+  classes: {},
   nodeLoading: <span>Loading...</span>,
   nodeContentBack: <span>←</span>,
 };

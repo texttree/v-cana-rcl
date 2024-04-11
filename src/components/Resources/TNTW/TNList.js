@@ -53,7 +53,7 @@ function TNList({
                       onClick={() => {
                         handleSaveScroll(verseNumber, note.ID);
                         setItem({ text: note.Note, title: note.Quote });
-                        handleClick({ text: note.Note, title: note.Quote, id: note.ID });
+                        handleClick(note);
                       }}
                     >
                       <ReactMarkdown>{note.Quote}</ReactMarkdown>
@@ -98,21 +98,13 @@ TNList.propTypes = {
 };
 
 TNList.defaultProps = {
-  setItem: () => {},
-  notes: {},
+  questionObjects: {},
   toolId: 'tn',
   isLoading: false,
   scrollTopOffset: 20,
   startHighlightIds: {},
   startScrollVerse: '1',
-  classes: {
-    container: '',
-    verseWrapper: '',
-    verseNumber: '',
-    verseBlock: '',
-    currentNote: '',
-    note: '',
-  },
+  classes: {},
   handleClick: () => {},
 };
 

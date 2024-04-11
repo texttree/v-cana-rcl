@@ -22,9 +22,8 @@ let sections = [
   {
     name: 'TQuestions',
     components: [
-      'src/components/Resources/TQ/Question.js',
-      'src/components/Resources/TQ/QuestionList.js',
-      'src/components/Resources/TQ/TQ.js',
+      'src/components/Resources/TQ/TQuestion.js',
+      'src/components/Resources/TQ/TQuestionsList.js',
     ],
   },
   {

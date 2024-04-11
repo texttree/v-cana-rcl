@@ -6,6 +6,5 @@ export { default as Bible } from './Resources/Bible/Bible';
 export { default as TN } from './Resources/TNTW/TN';
 export { default as TNContent } from './Resources/TNTW/TNContent';
 export { default as TNList } from './Resources/TNTW/TNList';
-export { default as Question } from './Resources/TQ/Question';
-export { default as QuestionList } from './Resources/TQ/QuestionList';
-export { default as TQ } from './Resources/TQ/TQ';
+export { default as TQuestion } from './Resources/TQ/TQuestion';
+export { default as TQuestionsList } from './Resources/TQ/TQuestionsList';
