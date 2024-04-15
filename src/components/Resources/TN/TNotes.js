@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import TNList from './TNList';
 import TNContent from './TNContent';
 
-function TN({
+function TNotes({
   tnotes,
   isLoading,
   toolId,
@@ -31,10 +31,10 @@ function TN({
             />
           ) : (
             <TNList
-              setItem={setNote}
+              setNote={setNote}
               notes={tnotes}
               toolId={toolId}
-              isLoading={isLoading || tnotes}
+              isLoading={isLoading}
               startHighlightIds={startHighlightIds}
               startScrollVerse={startScrollVerse}
               scrollTopOffset={scrollTopOffset}
@@ -46,7 +46,7 @@ function TN({
     </>
   );
 }
-TN.propTypes = {
+TNotes.propTypes = {
   // Object containing translation notes
   tnotes: PropTypes.object,
   // Boolean to indicate if the component is in a loading state
@@ -70,7 +70,7 @@ TN.propTypes = {
   // The element to display as the content back button
   nodeContentBack: PropTypes.element,
 };
-TN.defaultProps = {
+TNotes.defaultProps = {
   tnotes: {},
   isLoading: false,
   toolId: 'tn',
@@ -81,4 +81,4 @@ TN.defaultProps = {
   nodeLoading: <span>Loading...</span>,
   nodeContentBack: <span>←</span>,
 };
-export default TN;
+export default TNotes;

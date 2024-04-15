@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import useScroll from '../useScroll';
 import TQuestion from './TQuestion';
-function TQuestionsList({
+function TQuestions({
   questionObjects,
   toolId,
   isLoading,
@@ -69,7 +69,7 @@ function TQuestionsList({
   );
 }
 
-TQuestionsList.propTypes = {
+TQuestions.propTypes = {
   // Objects of questions
   questionObjects: PropTypes.object,
   // The tool id
@@ -97,7 +97,7 @@ TQuestionsList.propTypes = {
   nodeOpen: PropTypes.element,
 };
 
-TQuestionsList.defaultProps = {
+TQuestions.defaultProps = {
   setItem: () => {},
   notes: {},
   toolId: 'tn',
@@ -109,4 +109,4 @@ TQuestionsList.defaultProps = {
   handleClick: () => {},
   nodeOpen: <span>Open</span>,
 };
-export default TQuestionsList;
+export default TQuestions;

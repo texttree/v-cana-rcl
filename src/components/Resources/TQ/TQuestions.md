@@ -2,15 +2,15 @@
 
 ```jsx
 import React from 'react';
-import { TQuestionsList } from '@texttree/v-cana-rcl';
+import { TQuestions } from '@texttree/v-cana-rcl';
 import { tq } from '../../../../mocks/resources/parsed/tq.js';
 import { icons } from '../../../../mocks/notesEditor.js';
 function Component() {
   return (
-    <div className="h-64 overflow-y-auto white" id="container_tquestionlist">
-      <TQuestionsList
+    <div className="h-64 overflow-y-auto white" id="container_tquestions">
+      <TQuestions
         questionObjects={tq}
-        toolId="tquestionlist"
+        toolId="tquestions"
         nodeOpen={icons.arrowDown}
         classes={{
           verseNumber: 'p-1',

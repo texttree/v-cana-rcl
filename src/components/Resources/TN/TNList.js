@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import useScroll from '../useScroll';
 
 function TNList({
-  setItem,
+  setNote,
   notes,
   toolId,
   isLoading,
@@ -52,7 +52,7 @@ function TNList({
                       }`}
                       onClick={() => {
                         handleSaveScroll(verseNumber, note.ID);
-                        setItem({ text: note.Note, title: note.Quote });
+                        setNote({ text: note.Note, title: note.Quote });
                         handleClick(note);
                       }}
                     >
@@ -71,7 +71,7 @@ function TNList({
 
 TNList.propTypes = {
   // Function to set the item
-  setItem: PropTypes.func,
+  setNote: PropTypes.func,
   // Object containing notes
   notes: PropTypes.object,
   // The tool id
@@ -98,7 +98,7 @@ TNList.propTypes = {
 };
 
 TNList.defaultProps = {
-  questionObjects: {},
+  notes: {},
   toolId: 'tn',
   isLoading: false,
   scrollTopOffset: 20,

@@ -2,13 +2,13 @@
 
 ```jsx
 import React from 'react';
-import { TN } from '@texttree/v-cana-rcl';
+import { TNotes } from '@texttree/v-cana-rcl';
 import { tnotes } from '../../../../mocks/resources/parsed/tn.js';
 import { icons } from '../../../../mocks/notesEditor.js';
 function Component() {
   return (
     <div className="h-64 overflow-y-scroll white">
-      <TN
+      <TNotes
         tnotes={tnotes}
         classes={{
           list: {

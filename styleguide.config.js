@@ -12,18 +12,18 @@ let sections = [
     components: ['src/components/Resources/Bible/Bible.js'],
   },
   {
-    name: 'TNotes',
+    name: 'TN',
     components: [
-      'src/components/Resources/TNTW/TN.js',
-      'src/components/Resources/TNTW/TNContent.js',
-      'src/components/Resources/TNTW/TNList.js',
+      'src/components/Resources/TN/TNotes.js',
+      'src/components/Resources/TN/TNContent.js',
+      'src/components/Resources/TN/TNList.js',
     ],
   },
   {
-    name: 'TQuestions',
+    name: 'TQ',
     components: [
       'src/components/Resources/TQ/TQuestion.js',
-      'src/components/Resources/TQ/TQuestionsList.js',
+      'src/components/Resources/TQ/TQuestions.js',
     ],
   },
   {
