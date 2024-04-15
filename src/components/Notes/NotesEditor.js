@@ -102,7 +102,7 @@ const NotesEditor = ({
         </>
       ) : (
         <>
-          <div
+          <button
             className={classes.back}
             onClick={() => {
               handleSaveNote();
@@ -112,7 +112,7 @@ const NotesEditor = ({
             }}
           >
             {icons.left}
-          </div>
+          </button>
           <Redactor
             classes={classes.redactor}
             activeNote={activeNote}

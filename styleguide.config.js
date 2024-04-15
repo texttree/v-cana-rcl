@@ -27,10 +27,17 @@ let sections = [
     ],
   },
   {
-    name: 'NotesEditor Block',
+    name: 'NotesEditor',
     components: [
       'src/components/Notes/NotesEditor.js',
       'src/components/Notes/MenuButtons.js',
+    ],
+  },
+  {
+    name: 'Dictionary Block',
+    components: [
+      'src/components/Notes/Dictionary.js',
+      'src/components/Notes/Alphabet.js',
     ],
   },
   // {
