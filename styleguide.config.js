@@ -40,6 +40,10 @@ let sections = [
       'src/components/Notes/Alphabet.js',
     ],
   },
+  {
+    name: 'Markdown',
+    components: ['src/components/Markdown/Markdown.js'],
+  },
   // {
   //   name: 'Workspace Block',
   //   components: ['src/components/Workspace/Workspace.js'],
@@ -130,6 +134,10 @@ module.exports = {
           test: /\.jsx?$/,
           exclude: /node_modules/,
           loader: 'babel-loader',
+        },
+        {
+          test: /\.css$/,
+          use: ['style-loader', 'css-loader'],
         },
       ],
     },

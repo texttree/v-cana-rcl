@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import ReactMarkdown from 'react-markdown';
+import Markdown from '../../Markdown/Markdown';
 import useScroll from '../useScroll';
 
 function TNList({
@@ -60,7 +60,7 @@ function TNList({
                         handleClick(note);
                       }}
                     >
-                      <ReactMarkdown>{note.Quote}</ReactMarkdown>
+                      <Markdown>{note.Quote}</Markdown>
                     </li>
                   );
                 })}

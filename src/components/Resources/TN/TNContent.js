@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
 import PropTypes from 'prop-types';
+import Markdown from '../../Markdown/Markdown';
 function TNContent({ setNote, note, classes, nodeBack }) {
   return (
     <div className={classes.container}>
@@ -9,10 +9,10 @@ function TNContent({ setNote, note, classes, nodeBack }) {
           {nodeBack}
         </button>
         {!['intro', 'front'].includes(note?.title) && (
-          <ReactMarkdown className={classes.title}>{note?.title}</ReactMarkdown>
+          <Markdown className={classes.title}>{note?.title}</Markdown>
         )}
       </div>
-      <ReactMarkdown className={classes.text}>{note?.text}</ReactMarkdown>
+      <Markdown className={classes.text}>{note?.text}</Markdown>
     </div>
   );
 }

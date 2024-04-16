@@ -10,3 +10,4 @@ export { default as TNContent } from './Resources/TN/TNContent';
 export { default as TNList } from './Resources/TN/TNList';
 export { default as TQuestion } from './Resources/TQ/TQuestion';
 export { default as TQuestions } from './Resources/TQ/TQuestions';
+export { default as Markdown } from './Markdown/Markdown';
