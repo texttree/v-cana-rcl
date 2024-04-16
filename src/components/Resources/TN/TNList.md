@@ -31,7 +31,7 @@ import { TNList } from '@texttree/v-cana-rcl';
 import { tnotes } from '../../../../mocks/resources/parsed/tn.js';
 function Component() {
   const [note, setNote] = useState(null);
-  const [currentScrollVerse, setCurrentScrollVerse] = useState(1);
+  const [currentScrollVerse, setCurrentScrollVerse] = useState(3);
 
   return (
     <div className="h-64 overflow-y-auto" id="container_tnlist">

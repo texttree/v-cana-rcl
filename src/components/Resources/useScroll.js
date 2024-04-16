@@ -24,7 +24,7 @@ function useScroll({
             scrollTopOffset,
         });
       }
-    }, 100);
+    }, 200);
   }, [currentScrollVerse, isLoading]);
 
   const handleSaveScroll = (verse, id) => {
