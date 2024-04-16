@@ -26,26 +26,29 @@ function TWords({
         nodeLoading
       ) : (
         <div className={classes.main}>
-          <TNContent
-            setNote={setWord}
-            note={word}
-            classes={classes.content}
-            nodeBack={nodeContentBack}
-          />
-          <TWList
-            setWord={setWord}
-            words={twords}
-            toolId={toolId}
-            isLoading={isLoading}
-            startHighlightIds={startHighlightIds}
-            currentScrollVerse={currentScrollVerse}
-            setCurrentScrollVerse={setCurrentScrollVerse}
-            scrollTopOffset={scrollTopOffset}
-            classes={classes.list}
-            handleClick={handleClickWord}
-            idContainerScroll={idContainerScroll}
-            filter={filter}
-          />
+          {word ? (
+            <TNContent
+              setNote={setWord}
+              note={word}
+              classes={classes.content}
+              nodeBack={nodeContentBack}
+            />
+          ) : (
+            <TWList
+              setWord={setWord}
+              words={twords}
+              toolId={toolId}
+              isLoading={isLoading}
+              startHighlightIds={startHighlightIds}
+              currentScrollVerse={currentScrollVerse}
+              setCurrentScrollVerse={setCurrentScrollVerse}
+              scrollTopOffset={scrollTopOffset}
+              classes={classes.list}
+              handleClick={handleClickWord}
+              idContainerScroll={idContainerScroll}
+              filter={filter}
+            />
+          )}
         </div>
       )}
     </>

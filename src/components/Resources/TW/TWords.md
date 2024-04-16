@@ -1,4 +1,4 @@
-### TN
+### TW
 
 ```jsx
 import React, { useState } from 'react';
@@ -9,7 +9,7 @@ function Component() {
   const [currentScrollVerse, setCurrentScrollVerse] = useState('1');
 
   return (
-    <div className="h-64 overflow-y-scroll" id="container_twords relative">
+    <div className="h-64 overflow-y-scroll" id="container_twords">
       <TWords
         twords={twords}
         classes={{
