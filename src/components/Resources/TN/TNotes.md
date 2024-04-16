@@ -1,13 +1,15 @@
 ### TN
 
 ```jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { TNotes } from '@texttree/v-cana-rcl';
 import { tnotes } from '../../../../mocks/resources/parsed/tn.js';
 import { icons } from '../../../../mocks/notesEditor.js';
 function Component() {
+  const [currentScrollVerse, setCurrentScrollVerse] = useState(1);
+
   return (
-    <div className="h-64 overflow-y-scroll white">
+    <div className="h-64 overflow-y-scroll white" id="container_tnotes32">
       <TNotes
         tnotes={tnotes}
         classes={{
@@ -22,6 +24,11 @@ function Component() {
           },
         }}
         nodeContentBack={icons.left}
+        handleClickNote={(note) => console.log(note)}
+        currentScrollVerse={currentScrollVerse}
+        setCurrentScrollVerse={setCurrentScrollVerse}
+        toolId="tnotes32"
+        idContainerScroll="container_tnotes32"
       />
     </div>
   );

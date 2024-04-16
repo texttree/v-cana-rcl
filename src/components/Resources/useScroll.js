@@ -5,16 +5,17 @@ function useScroll({
   toolId,
   isLoading,
   idVersePrefix,
-  startScrollVerse,
+  idContainerScroll,
   startHighlightIds,
   scrollTopOffset,
+  currentScrollVerse,
+  setCurrentScrollVerse,
 }) {
-  const [currentScrollVerse, setCurrentScrollVerse] = useState(startScrollVerse);
   const [highlightIds, setHighlightIds] = useState(startHighlightIds);
   useEffect(() => {
     setTimeout(() => {
       const element = document.getElementById(idVersePrefix + currentScrollVerse);
-      const container = document.getElementById('container_' + toolId);
+      const container = document.getElementById(idContainerScroll);
       if (element && container) {
         container.scrollBy({
           top:
@@ -34,20 +35,24 @@ function useScroll({
   };
   return {
     highlightId: highlightIds[toolId],
-    currentScrollVerse,
     handleSaveScroll,
   };
 }
 
 useScroll.propTypes = {
+  // The current verse being scrolled to.
+  currentScrollVerse: PropTypes.number,
+  // Function to set the current verse.
+  setCurrentScrollVerse: PropTypes.func,
   // The name of the tool using this hook.
   toolId: PropTypes.string,
   // Indicates whether the content is still loading or not.
   isLoading: PropTypes.bool,
   // A string to prefix the verse id when looking up the scroll target.
   idVersePrefix: PropTypes.string.isRequired,
-  // The verse to initially scroll to.
-  startScrollVerse: PropTypes.string,
+  // The id of the container to scroll to.
+  idContainerScroll: PropTypes.string,
+
   // Object with tool names and their corresponding highlight ids.
   startHighlightIds: PropTypes.object,
   // The number of pixels to offset the scroll from the top of the container.
@@ -55,10 +60,12 @@ useScroll.propTypes = {
 };
 
 useScroll.defaultProps = {
-  toolId: 'default',
+  currentScrollVerse: 0,
+  setCurrentScrollVerse: () => {},
+  toolId: 'toolId',
   isLoading: false,
   idVersePrefix: 'id',
-  startScrollVerse: '1',
+  idContainerScroll: 'container-scroll',
   startHighlightIds: {},
   scrollTopOffset: 20,
 };

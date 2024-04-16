@@ -1,10 +1,12 @@
 ### TNList
 
 ```jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { TNList } from '@texttree/v-cana-rcl';
 import { tnotes } from '../../../../mocks/resources/parsed/tn.js';
 function Component() {
+  const [note, setNote] = useState(null);
+
   return (
     <div className="h-64 overflow-y-auto white">
       <TNList
@@ -13,6 +15,7 @@ function Component() {
           verseWrapper: 'flex gap-4 border-b-2 border-gray-500 cursor-pointer',
         }}
         handleClick={(note) => alert(JSON.stringify(note))}
+        setNote={setNote}
       />
     </div>
   );
@@ -23,10 +26,13 @@ function Component() {
 ### Scroll example
 
 ```jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { TNList } from '@texttree/v-cana-rcl';
 import { tnotes } from '../../../../mocks/resources/parsed/tn.js';
 function Component() {
+  const [note, setNote] = useState(null);
+  const [currentScrollVerse, setCurrentScrollVerse] = useState(1);
+
   return (
     <div className="h-64 overflow-y-auto" id="container_tnlist">
       <TNList
@@ -38,6 +44,10 @@ function Component() {
         }}
         toolId="tnlist"
         startHighlightIds={{ tnlist: 'idtn97' }}
+        setNote={setNote}
+        currentScrollVerse={currentScrollVerse}
+        setCurrentScrollVerse={setCurrentScrollVerse}
+        idContainerScroll="container_tnlist"
       />
     </div>
   );

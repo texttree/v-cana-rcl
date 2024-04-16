@@ -1,11 +1,12 @@
 ### TQuestionsList
 
 ```jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { TQuestions } from '@texttree/v-cana-rcl';
 import { tq } from '../../../../mocks/resources/parsed/tq.js';
 import { icons } from '../../../../mocks/notesEditor.js';
 function Component() {
+  const [currentScrollVerse, setCurrentScrollVerse] = useState(1);
   return (
     <div className="h-64 overflow-y-auto white" id="container_tquestions">
       <TQuestions
@@ -20,6 +21,10 @@ function Component() {
             highlightButton: 'bg-gray-200 rounded-md',
           },
         }}
+        idContainerScroll="container_tquestions"
+        currentScrollVerse={currentScrollVerse}
+        setCurrentScrollVerse={setCurrentScrollVerse}
+        scrollTopOffset={50}
       />
     </div>
   );

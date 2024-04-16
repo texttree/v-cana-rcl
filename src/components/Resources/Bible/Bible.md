@@ -24,10 +24,11 @@ function Component() {
 ### Scroll to current verse and highliting
 
 ```jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { Bible } from '@texttree/v-cana-rcl';
 import { literal } from '../../../../mocks/resources/parsed/literal.js';
 function Component() {
+  const [currentScrollVerse, setCurrentScrollVerse] = useState(1);
   return (
     <div className="h-64 overflow-y-scroll" id="container_simplified">
       <Bible
@@ -38,6 +39,9 @@ function Component() {
           currentVerse: 'bg-gray-300 p-2 rounded-md',
         }}
         toolId="simplified"
+        currentScrollVerse={currentScrollVerse}
+        setCurrentScrollVerse={setCurrentScrollVerse}
+        idContainerScroll="container_simplified"
       />
     </div>
   );
@@ -48,10 +52,11 @@ function Component() {
 ### Draft mode with with hiding verses
 
 ```jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { Bible } from '@texttree/v-cana-rcl';
 import { literal } from '../../../../mocks/resources/parsed/literal.js';
 function Component() {
+  const [currentScrollVerse, setCurrentScrollVerse] = useState(1);
   return (
     <Bible
       verseObjects={literal[1]}
@@ -62,6 +67,8 @@ function Component() {
       }}
       hiddenVerses={['4', '10']}
       isDraft
+      currentScrollVerse={currentScrollVerse}
+      setCurrentScrollVerse={setCurrentScrollVerse}
     />
   );
 }

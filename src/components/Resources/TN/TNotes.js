@@ -9,11 +9,14 @@ function TNotes({
   isLoading,
   toolId,
   startHighlightIds,
-  startScrollVerse,
+  currentScrollVerse,
+  setCurrentScrollVerse,
   scrollTopOffset,
   classes,
   nodeLoading,
   nodeContentBack,
+  handleClickNote,
+  idContainerScroll,
 }) {
   const [note, setNote] = useState(null);
   return (
@@ -36,9 +39,12 @@ function TNotes({
               toolId={toolId}
               isLoading={isLoading}
               startHighlightIds={startHighlightIds}
-              startScrollVerse={startScrollVerse}
+              currentScrollVerse={currentScrollVerse}
+              setCurrentScrollVerse={setCurrentScrollVerse}
               scrollTopOffset={scrollTopOffset}
               classes={classes.list}
+              handleClick={handleClickNote}
+              idContainerScroll={idContainerScroll}
             />
           )}
         </div>
@@ -56,7 +62,9 @@ TNotes.propTypes = {
   // Object containing ids to highlight
   startHighlightIds: PropTypes.object,
   // The verse to start scrolling to
-  startScrollVerse: PropTypes.string,
+  currentScrollVerse: PropTypes.number,
+  // Function to set the current verse
+  setCurrentScrollVerse: PropTypes.func,
   // The offset for scrolling to the top
   scrollTopOffset: PropTypes.number,
   // Styles for different parts of the component
@@ -69,16 +77,23 @@ TNotes.propTypes = {
   nodeLoading: PropTypes.element,
   // The element to display as the content back button
   nodeContentBack: PropTypes.element,
+  // Function to handle item click
+  handleClickNote: PropTypes.func,
+  // The id of the container
+  idContainerScroll: PropTypes.string,
 };
 TNotes.defaultProps = {
+  currentScrollVerse: 0,
+  setCurrentScrollVerse: () => {},
   tnotes: {},
   isLoading: false,
   toolId: 'tn',
   startHighlightIds: {},
-  startScrollVerse: '0',
   scrollTopOffset: 20,
   classes: {},
   nodeLoading: <span>Loading...</span>,
   nodeContentBack: <span>←</span>,
+  handleClickNote: () => {},
+  idContainerScroll: 'container-tn',
 };
 export default TNotes;

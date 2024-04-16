@@ -10,16 +10,19 @@ function Bible({
   classes,
   toolId,
   startHighlightIds,
-  startScrollVerse,
+  currentScrollVerse,
+  setCurrentScrollVerse,
   hiddenVerses,
   nodeLoading,
+  idContainerScroll,
 }) {
-  const { handleSaveScroll, currentScrollVerse } = useScroll({
+  const { handleSaveScroll } = useScroll({
     toolId,
     idVersePrefix: toolId,
     isLoading,
     startHighlightIds,
-    startScrollVerse,
+    setCurrentScrollVerse,
+    currentScrollVerse,
     scrollTopOffset: 100,
   });
 
@@ -45,6 +48,10 @@ function Bible({
   );
 }
 Bible.propTypes = {
+  // An object containing the verse and text of the verse
+  currentScrollVerse: PropTypes.number,
+  // Function to set the current verse
+  setCurrentScrollVerse: PropTypes.func,
   // An array of objects representing verses with verse and text properties
   verseObjects: PropTypes.array,
   // A boolean indicating if the content is still loading
@@ -57,23 +64,25 @@ Bible.propTypes = {
   toolId: PropTypes.string,
   // An object containing tool names and their corresponding highlight ids
   startHighlightIds: PropTypes.object,
-  // A string representing the verse to initially scroll to
-  startScrollVerse: PropTypes.string,
   // An array of strings representing hidden verses
   hiddenVerses: PropTypes.array,
   // A React node to render when the content is still loading
   nodeLoading: PropTypes.node,
+
+  idContainerScroll: PropTypes.string,
 };
 
 Bible.defaultProps = {
+  currentScrollVerse: 0,
+  setCurrentScrollVerse: () => {},
   verseObjects: [],
   isLoading: false,
   isDraft: false,
   classes: {},
   toolId: 'default',
   startHighlightIds: {},
-  startScrollVerse: '1',
   hiddenVerses: [],
   nodeLoading: <div>Loading...</div>,
+  idContainerScroll: 'container-scroll',
 };
 export default Bible;

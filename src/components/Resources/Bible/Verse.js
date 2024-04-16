@@ -24,7 +24,7 @@ function Verse({
         handleSaveScroll(String(verse));
       }}
     >
-      <div className={classes.numVerse}>{verse}</div>
+      <div className={classes.numVerse}>{parseInt(verse)}</div>
       {isDraft && hiddenCurrent ? (
         <div className={classes.hideVerse}>{text}</div>
       ) : (
@@ -41,7 +41,7 @@ Verse.propTypes = {
     text: PropTypes.string.isRequired,
   }).isRequired,
   // The currently scrolled verse.
-  currentScrollVerse: PropTypes.string,
+  currentScrollVerse: PropTypes.number,
   // CSS classes for the component.
   classes: PropTypes.object,
   // The name of the tool using this component.

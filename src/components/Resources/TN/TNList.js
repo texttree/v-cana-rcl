@@ -10,9 +10,11 @@ function TNList({
   isLoading,
   scrollTopOffset,
   startHighlightIds,
-  startScrollVerse,
+  currentScrollVerse,
+  setCurrentScrollVerse,
   classes,
   handleClick,
+  idContainerScroll,
 }) {
   const [verses, setVerses] = useState([]);
   const idVersePrefix = 'id' + toolId;
@@ -21,8 +23,10 @@ function TNList({
     isLoading,
     idVersePrefix,
     startHighlightIds,
-    startScrollVerse,
+    currentScrollVerse,
+    setCurrentScrollVerse,
     scrollTopOffset,
+    idContainerScroll,
   });
 
   useEffect(() => {
@@ -51,7 +55,7 @@ function TNList({
                         highlightId === 'id' + note.ID ? classes.currentNote : ''
                       }`}
                       onClick={() => {
-                        handleSaveScroll(verseNumber, note.ID);
+                        handleSaveScroll(parseInt(verseNumber), note.ID);
                         setNote({ text: note.Note, title: note.Quote });
                         handleClick(note);
                       }}
@@ -70,6 +74,10 @@ function TNList({
 }
 
 TNList.propTypes = {
+  // The verse to start scrolling to
+  currentScrollVerse: PropTypes.number,
+  // Function to set the current verse
+  setCurrentScrollVerse: PropTypes.func,
   // Function to set the item
   setNote: PropTypes.func,
   // Object containing notes
@@ -82,8 +90,6 @@ TNList.propTypes = {
   scrollTopOffset: PropTypes.number,
   // Object of ids to highlight
   startHighlightIds: PropTypes.object,
-  // The verse to start scrolling to
-  startScrollVerse: PropTypes.string,
   // Styles for different parts of the component
   classes: PropTypes.shape({
     container: PropTypes.string, // Styles for the container
@@ -95,17 +101,21 @@ TNList.propTypes = {
   }),
   // Function to handle click events
   handleClick: PropTypes.func,
+  // The id of the container
+  idContainerScroll: PropTypes.string,
 };
 
 TNList.defaultProps = {
+  currentScrollVerse: 0,
+  setCurrentScrollVerse: () => {},
   notes: {},
   toolId: 'tn',
   isLoading: false,
   scrollTopOffset: 20,
   startHighlightIds: {},
-  startScrollVerse: '1',
   classes: {},
   handleClick: () => {},
+  idContainerScroll: 'container-tn',
 };
 
 export default TNList;
