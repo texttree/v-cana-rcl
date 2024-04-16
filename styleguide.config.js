@@ -20,6 +20,13 @@ let sections = [
     ],
   },
   {
+    name: 'TW',
+    components: [
+      'src/components/Resources/TW/TWords.js',
+      'src/components/Resources/TW/TWList.js',
+    ],
+  },
+  {
     name: 'TQ',
     components: [
       'src/components/Resources/TQ/TQuestion.js',
@@ -44,6 +51,7 @@ let sections = [
     name: 'Markdown',
     components: ['src/components/Markdown/Markdown.js'],
   },
+
   // {
   //   name: 'Workspace Block',
   //   components: ['src/components/Workspace/Workspace.js'],

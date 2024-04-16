@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Markdown from '../../Markdown/Markdown';
 function TNContent({ setNote, note, classes, nodeBack }) {
   return (
-    <div className={classes.container}>
+    <div className={`${classes.container} ${note ? '' : 'hidden'}`}>
       <div className={classes.header}>
         <button className={classes.backButton} onClick={() => setNote(null)}>
           {nodeBack}
@@ -12,7 +12,7 @@ function TNContent({ setNote, note, classes, nodeBack }) {
           <Markdown className={classes.title}>{note?.title}</Markdown>
         )}
       </div>
-      <Markdown className={classes.text}>{note?.text}</Markdown>
+      <Markdown className={`${classes.text} markdown-body`}>{note?.text}</Markdown>
     </div>
   );
 }

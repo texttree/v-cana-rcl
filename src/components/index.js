@@ -11,3 +11,5 @@ export { default as TNList } from './Resources/TN/TNList';
 export { default as TQuestion } from './Resources/TQ/TQuestion';
 export { default as TQuestions } from './Resources/TQ/TQuestions';
 export { default as Markdown } from './Markdown/Markdown';
+export { default as TWords } from './Resources/TW/TWords';
+export { default as TWList } from './Resources/TW/TWList';
