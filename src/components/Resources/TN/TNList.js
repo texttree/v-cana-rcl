@@ -75,7 +75,7 @@ function TNList({
 
 TNList.propTypes = {
   // The verse to start scrolling to
-  currentScrollVerse: PropTypes.number,
+  currentScrollVerse: PropTypes.string,
   // Function to set the current verse
   setCurrentScrollVerse: PropTypes.func,
   // Function to set the item
@@ -106,7 +106,7 @@ TNList.propTypes = {
 };
 
 TNList.defaultProps = {
-  currentScrollVerse: 0,
+  currentScrollVerse: '0',
   setCurrentScrollVerse: () => {},
   notes: {},
   toolId: 'tn',

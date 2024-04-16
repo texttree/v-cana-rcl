@@ -49,7 +49,7 @@ function Bible({
 }
 Bible.propTypes = {
   // An object containing the verse and text of the verse
-  currentScrollVerse: PropTypes.number,
+  currentScrollVerse: PropTypes.string,
   // Function to set the current verse
   setCurrentScrollVerse: PropTypes.func,
   // An array of objects representing verses with verse and text properties
@@ -73,7 +73,7 @@ Bible.propTypes = {
 };
 
 Bible.defaultProps = {
-  currentScrollVerse: 0,
+  currentScrollVerse: '0',
   setCurrentScrollVerse: () => {},
   verseObjects: [],
   isLoading: false,

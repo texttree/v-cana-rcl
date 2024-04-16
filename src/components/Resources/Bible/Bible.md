@@ -28,7 +28,7 @@ import React, { useState } from 'react';
 import { Bible } from '@texttree/v-cana-rcl';
 import { literal } from '../../../../mocks/resources/parsed/literal.js';
 function Component() {
-  const [currentScrollVerse, setCurrentScrollVerse] = useState(1);
+  const [currentScrollVerse, setCurrentScrollVerse] = useState('1');
   return (
     <div className="h-64 overflow-y-scroll" id="container_simplified">
       <Bible
@@ -56,7 +56,7 @@ import React, { useState } from 'react';
 import { Bible } from '@texttree/v-cana-rcl';
 import { literal } from '../../../../mocks/resources/parsed/literal.js';
 function Component() {
-  const [currentScrollVerse, setCurrentScrollVerse] = useState(1);
+  const [currentScrollVerse, setCurrentScrollVerse] = useState('1');
   return (
     <Bible
       verseObjects={literal[1]}

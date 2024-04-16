@@ -75,7 +75,7 @@ function TQuestions({
 
 TQuestions.propTypes = {
   // Function to set the current verse
-  currentScrollVerse: PropTypes.number,
+  currentScrollVerse: PropTypes.string,
   // Function to set the current verse
   setCurrentScrollVerse: PropTypes.func,
   // Objects of questions
@@ -106,7 +106,7 @@ TQuestions.propTypes = {
 };
 
 TQuestions.defaultProps = {
-  currentScrollVerse: 0,
+  currentScrollVerse: '0',
   setCurrentScrollVerse: () => {},
   setItem: () => {},
   notes: {},

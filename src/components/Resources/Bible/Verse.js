@@ -41,7 +41,7 @@ Verse.propTypes = {
     text: PropTypes.string.isRequired,
   }).isRequired,
   // The currently scrolled verse.
-  currentScrollVerse: PropTypes.number,
+  currentScrollVerse: PropTypes.string,
   // CSS classes for the component.
   classes: PropTypes.object,
   // The name of the tool using this component.
@@ -55,6 +55,7 @@ Verse.propTypes = {
 };
 
 Verse.defaultProps = {
+  currentScrollVerse: '0',
   classes: {},
   isDraft: false,
   hiddenVerses: [],

@@ -62,7 +62,7 @@ TNotes.propTypes = {
   // Object containing ids to highlight
   startHighlightIds: PropTypes.object,
   // The verse to start scrolling to
-  currentScrollVerse: PropTypes.number,
+  currentScrollVerse: PropTypes.string,
   // Function to set the current verse
   setCurrentScrollVerse: PropTypes.func,
   // The offset for scrolling to the top
@@ -83,7 +83,7 @@ TNotes.propTypes = {
   idContainerScroll: PropTypes.string,
 };
 TNotes.defaultProps = {
-  currentScrollVerse: 0,
+  currentScrollVerse: '0',
   setCurrentScrollVerse: () => {},
   tnotes: {},
   isLoading: false,
