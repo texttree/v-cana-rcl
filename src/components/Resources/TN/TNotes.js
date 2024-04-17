@@ -8,7 +8,6 @@ function TNotes({
   tnotes,
   isLoading,
   toolId,
-  startHighlightIds,
   currentScrollVerse,
   setCurrentScrollVerse,
   scrollTopOffset,
@@ -40,7 +39,6 @@ function TNotes({
               notes={tnotes}
               toolId={toolId}
               isLoading={isLoading}
-              startHighlightIds={startHighlightIds}
               currentScrollVerse={currentScrollVerse}
               setCurrentScrollVerse={setCurrentScrollVerse}
               scrollTopOffset={scrollTopOffset}
@@ -62,8 +60,6 @@ TNotes.propTypes = {
   isLoading: PropTypes.bool,
   // The tool id
   toolId: PropTypes.string,
-  // Object containing ids to highlight
-  startHighlightIds: PropTypes.object,
   // The verse to start scrolling to
   currentScrollVerse: PropTypes.string,
   // Function to set the current verse
@@ -93,7 +89,6 @@ TNotes.defaultProps = {
   tnotes: {},
   isLoading: false,
   toolId: 'tn',
-  startHighlightIds: {},
   scrollTopOffset: 20,
   classes: {},
   nodeLoading: <span>Loading...</span>,

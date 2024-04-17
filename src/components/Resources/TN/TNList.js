@@ -9,7 +9,6 @@ function TNList({
   toolId,
   isLoading,
   scrollTopOffset,
-  startHighlightIds,
   currentScrollVerse,
   setCurrentScrollVerse,
   classes,
@@ -23,13 +22,13 @@ function TNList({
     toolId,
     isLoading,
     idVersePrefix,
-    startHighlightIds,
     currentScrollVerse,
     setCurrentScrollVerse,
     scrollTopOffset,
     idContainerScroll,
     delayScroll,
   });
+  console.log(idVersePrefix);
 
   useEffect(() => {
     if (notes) {
@@ -90,8 +89,6 @@ TNList.propTypes = {
   isLoading: PropTypes.bool,
   // The offset for scrolling to the top
   scrollTopOffset: PropTypes.number,
-  // Object of ids to highlight
-  startHighlightIds: PropTypes.object,
   // Styles for different parts of the component
   classes: PropTypes.shape({
     container: PropTypes.string, // Styles for the container
@@ -116,7 +113,6 @@ TNList.defaultProps = {
   toolId: 'tn',
   isLoading: false,
   scrollTopOffset: 20,
-  startHighlightIds: {},
   classes: {},
   handleClick: () => {},
   idContainerScroll: 'container-tn',

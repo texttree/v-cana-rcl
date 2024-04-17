@@ -1,18 +1,21 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { checkLSVal } from '../../utils/helper';
 
 function useScroll({
   toolId,
   isLoading,
   idVersePrefix,
   idContainerScroll,
-  startHighlightIds,
+  keyLocalStorageSave,
   scrollTopOffset,
   currentScrollVerse,
   setCurrentScrollVerse,
   delayScroll,
 }) {
-  const [highlightIds, setHighlightIds] = useState(startHighlightIds);
+  const [highlightIds, setHighlightIds] = useState(() => {
+    return checkLSVal(keyLocalStorageSave, {}, 'object');
+  });
   useEffect(() => {
     setTimeout(() => {
       const element = document.getElementById(idVersePrefix + currentScrollVerse);
@@ -31,10 +34,15 @@ function useScroll({
 
   const handleSaveScroll = (verse, id) => {
     if (id) {
+      localStorage.setItem(
+        keyLocalStorageSave,
+        JSON.stringify({ ...highlightIds, [toolId]: 'id' + id })
+      );
       setHighlightIds((prev) => ({ ...prev, [toolId]: 'id' + id }));
     }
     setCurrentScrollVerse(verse);
   };
+
   return {
     highlightId: highlightIds[toolId],
     handleSaveScroll,
@@ -54,12 +62,12 @@ useScroll.propTypes = {
   idVersePrefix: PropTypes.string.isRequired,
   // The id of the container to scroll to.
   idContainerScroll: PropTypes.string,
-  // Object with tool names and their corresponding highlight ids.
-  startHighlightIds: PropTypes.object,
   // The number of pixels to offset the scroll from the top of the container.
   scrollTopOffset: PropTypes.number,
   // The number of milliseconds to delay the scroll.
   delayScroll: PropTypes.number,
+  // The key used to save the highlight ids in localStorage.
+  keyLocalStorageSave: PropTypes.string,
 };
 
 useScroll.defaultProps = {
@@ -69,8 +77,8 @@ useScroll.defaultProps = {
   isLoading: false,
   idVersePrefix: 'id',
   idContainerScroll: 'container-scroll',
-  startHighlightIds: {},
   scrollTopOffset: 20,
   delayScroll: 300,
+  keyLocalStorageSave: 'highlightIds',
 };
 export default useScroll;

@@ -87,11 +87,8 @@
   "dependencies": {
     "@headlessui/react": "^1.7.18",
     "@texttree/notepad-rcl": "^2.4.1",
-    "css-loader": "^7.1.1",
-    "github-markdown-css": "^5.5.1",
     "react-markdown": "^9.0.1",
     "rehype-raw": "^7.0.0",
-    "remark-gfm": "^4.0.0",
-    "style-loader": "^4.0.0"
+    "remark-gfm": "^4.0.0"
   }
 }

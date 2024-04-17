@@ -43,7 +43,6 @@ function Component() {
           note: 'p-1',
         }}
         toolId="tnlist"
-        startHighlightIds={{ tnlist: 'idtn97' }}
         setNote={setNote}
         currentScrollVerse={currentScrollVerse}
         setCurrentScrollVerse={setCurrentScrollVerse}

@@ -8,7 +8,6 @@ function TWords({
   twords,
   isLoading,
   toolId,
-  startHighlightIds,
   currentScrollVerse,
   setCurrentScrollVerse,
   scrollTopOffset,
@@ -41,7 +40,6 @@ function TWords({
               words={twords}
               toolId={toolId}
               isLoading={isLoading}
-              startHighlightIds={startHighlightIds}
               currentScrollVerse={currentScrollVerse}
               setCurrentScrollVerse={setCurrentScrollVerse}
               scrollTopOffset={scrollTopOffset}
@@ -64,8 +62,6 @@ TWords.propTypes = {
   isLoading: PropTypes.bool,
   // The tool id
   toolId: PropTypes.string,
-  // Object containing ids to highlight
-  startHighlightIds: PropTypes.object,
   // The verse to start scrolling to
   currentScrollVerse: PropTypes.string,
   // Function to set the current verse
@@ -97,7 +93,6 @@ TWords.defaultProps = {
   twords: {},
   isLoading: false,
   toolId: 'tw',
-  startHighlightIds: {},
   scrollTopOffset: 20,
   classes: {},
   nodeLoading: <span>Loading...</span>,

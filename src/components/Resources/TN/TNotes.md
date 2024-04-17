@@ -18,7 +18,7 @@ function Component() {
             container:
               'divide-y divide-th-text-primary divide-dashed h-full overflow-auto',
             verseBlock: 'pl-7 flex-1',
-            currentNote: 'bg-th-secondary-100',
+            currentNote: 'bg-blue-300 rounded-md',
             note: 'p-2 cursor-pointer rounded-lg hover:bg-th-secondary-100',
             verseWrapper: 'p-4 flex mx-4',
           },
@@ -27,7 +27,7 @@ function Component() {
         handleClickNote={(note) => console.log(note)}
         currentScrollVerse={currentScrollVerse}
         setCurrentScrollVerse={setCurrentScrollVerse}
-        toolId="tnotes32"
+        toolId="tnotes"
         idContainerScroll="container_tnotes32"
       />
     </div>

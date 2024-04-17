@@ -6,7 +6,6 @@ function TQuestions({
   questionObjects,
   toolId,
   isLoading,
-  startHighlightIds,
   currentScrollVerse,
   setCurrentScrollVerse,
   scrollTopOffset,
@@ -20,7 +19,6 @@ function TQuestions({
     toolId,
     isLoading,
     idVersePrefix,
-    startHighlightIds,
     currentScrollVerse,
     setCurrentScrollVerse,
     scrollTopOffset,
@@ -86,8 +84,6 @@ TQuestions.propTypes = {
   isLoading: PropTypes.bool,
   // The offset for scrolling to the top
   scrollTopOffset: PropTypes.number,
-  // Object of ids to highlight
-  startHighlightIds: PropTypes.object,
   // Styles for different parts of the component
   classes: PropTypes.shape({
     verseWrapper: PropTypes.string, // Styles for the verse wrapper
@@ -113,7 +109,6 @@ TQuestions.defaultProps = {
   toolId: 'tn',
   isLoading: false,
   scrollTopOffset: 20,
-  startHighlightIds: {},
   classes: {},
   handleClick: () => {},
   nodeOpen: <span>Open</span>,

@@ -47,7 +47,6 @@ function Component() {
           filtered: 'text-gray-400',
         }}
         toolId="twlist"
-        startHighlightIds={{ twlist: 'idtn97' }}
         setWord={setWord}
         currentScrollVerse={currentScrollVerse}
         setCurrentScrollVerse={setCurrentScrollVerse}

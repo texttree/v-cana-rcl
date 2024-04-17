@@ -9,7 +9,6 @@ function TWList({
   toolId,
   isLoading,
   scrollTopOffset,
-  startHighlightIds,
   currentScrollVerse,
   setCurrentScrollVerse,
   classes,
@@ -24,7 +23,6 @@ function TWList({
     toolId,
     isLoading,
     idVersePrefix,
-    startHighlightIds,
     currentScrollVerse,
     setCurrentScrollVerse,
     scrollTopOffset,
@@ -105,8 +103,6 @@ TWList.propTypes = {
   isLoading: PropTypes.bool,
   // The offset for scrolling to the top
   scrollTopOffset: PropTypes.number,
-  // Object of ids to highlight
-  startHighlightIds: PropTypes.object,
   // Styles for different parts of the component
   classes: PropTypes.shape({
     container: PropTypes.string, // Styles for the container
@@ -134,7 +130,6 @@ TWList.defaultProps = {
   toolId: 'tw',
   isLoading: false,
   scrollTopOffset: 20,
-  startHighlightIds: {},
   classes: {},
   handleClick: () => {},
   idContainerScroll: 'container-tw',

@@ -4,8 +4,6 @@ import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 
-import 'github-markdown-css/github-markdown-light.css';
-
 function Markdown({ children, className = 'markdown-body' }) {
   const content = (typeof children === 'string' ? children : '')
     .replace(/< *br *\/?>/gi, '\n')

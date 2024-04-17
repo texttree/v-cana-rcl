@@ -9,7 +9,6 @@ function Bible({
   isDraft,
   classes,
   toolId,
-  startHighlightIds,
   currentScrollVerse,
   setCurrentScrollVerse,
   hiddenVerses,
@@ -20,7 +19,6 @@ function Bible({
     toolId,
     idVersePrefix: toolId,
     isLoading,
-    startHighlightIds,
     setCurrentScrollVerse,
     currentScrollVerse,
     scrollTopOffset: 100,
@@ -62,13 +60,11 @@ Bible.propTypes = {
   classes: PropTypes.object,
   // A string representing the name of the tool using this component
   toolId: PropTypes.string,
-  // An object containing tool names and their corresponding highlight ids
-  startHighlightIds: PropTypes.object,
   // An array of strings representing hidden verses
   hiddenVerses: PropTypes.array,
   // A React node to render when the content is still loading
   nodeLoading: PropTypes.node,
-
+  // The id of the container to scroll to
   idContainerScroll: PropTypes.string,
 };
 
@@ -80,7 +76,6 @@ Bible.defaultProps = {
   isDraft: false,
   classes: {},
   toolId: 'default',
-  startHighlightIds: {},
   hiddenVerses: [],
   nodeLoading: <div>Loading...</div>,
   idContainerScroll: 'container-scroll',
