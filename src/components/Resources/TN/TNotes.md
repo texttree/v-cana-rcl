@@ -6,7 +6,7 @@ import { TNotes } from '@texttree/v-cana-rcl';
 import { tnotes } from '../../../../mocks/resources/parsed/tn.js';
 import { icons } from '../../../../mocks/notesEditor.js';
 function Component() {
-  const [currentScrollVerse, setCurrentScrollVerse] = useState('1');
+  const [currentScrollVerse, setCurrentScrollVerse] = useState('3');
 
   return (
     <div className="h-64 overflow-y-scroll white" id="container_tnotes32">

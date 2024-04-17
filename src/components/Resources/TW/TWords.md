@@ -6,7 +6,8 @@ import { TWords } from '@texttree/v-cana-rcl';
 import { twords } from '../../../../mocks/resources/parsed/tw.js';
 import { icons } from '../../../../mocks/notesEditor.js';
 function Component() {
-  const [currentScrollVerse, setCurrentScrollVerse] = useState('1');
+  const [currentScrollVerse, setCurrentScrollVerse] = useState('2');
+  const [word, setWord] = useState(null);
 
   return (
     <div className="h-64 overflow-y-scroll" id="container_twords">
@@ -38,6 +39,8 @@ function Component() {
         setCurrentScrollVerse={setCurrentScrollVerse}
         toolId="twords"
         idContainerScroll="container_twords"
+        word={word}
+        setWord={setWord}
       />
     </div>
   );

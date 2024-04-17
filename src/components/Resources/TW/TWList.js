@@ -16,6 +16,7 @@ function TWList({
   handleClick,
   idContainerScroll,
   filter,
+  delayScroll,
 }) {
   const [verses, setVerses] = useState([]);
   const idVersePrefix = 'id' + toolId;
@@ -28,6 +29,7 @@ function TWList({
     setCurrentScrollVerse,
     scrollTopOffset,
     idContainerScroll,
+    delayScroll,
   });
 
   useEffect(() => {
@@ -67,7 +69,7 @@ function TWList({
                       key={word.id}
                       id={idVersePrefix + word.id}
                       className={`${classes.word} ${
-                        highlightId === 'id' + word.id ? classes.currentNote : ''
+                        highlightId === 'id' + word.id ? classes.currentWord : ''
                       } ${itemFilter ? classes.filtered : ''}`}
                       onClick={() => {
                         handleSaveScroll(parseInt(verseNumber), word.id);
@@ -111,8 +113,8 @@ TWList.propTypes = {
     verseWrapper: PropTypes.string, // Styles for the verse wrapper
     verseNumber: PropTypes.string, // Styles for the verse number
     verseBlock: PropTypes.string, // Styles for the verse block
-    currentNote: PropTypes.string, // Styles for the current word
-    word: PropTypes.string, // Styles for the note
+    currentWord: PropTypes.string, // Styles for the current word
+    word: PropTypes.string, // Styles for the word
     filtered: PropTypes.string, // Styles for the filtered word
   }),
   // Function to handle click events
@@ -121,20 +123,23 @@ TWList.propTypes = {
   idContainerScroll: PropTypes.string,
   // The filter for the list
   filter: PropTypes.string,
+  // The delay for the scroll
+  delayScroll: PropTypes.number,
 };
 
 TWList.defaultProps = {
   currentScrollVerse: '0',
   setCurrentScrollVerse: () => {},
   words: {},
-  toolId: 'tn',
+  toolId: 'tw',
   isLoading: false,
   scrollTopOffset: 20,
   startHighlightIds: {},
   classes: {},
   handleClick: () => {},
-  idContainerScroll: 'container-tn',
+  idContainerScroll: 'container-tw',
   filter: 'disabled',
+  delayScroll: 300,
 };
 
 export default TWList;

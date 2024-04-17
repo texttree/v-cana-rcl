@@ -17,6 +17,7 @@ function TNotes({
   nodeContentBack,
   handleClickNote,
   idContainerScroll,
+  delayScroll,
 }) {
   const [note, setNote] = useState(null);
   return (
@@ -34,6 +35,7 @@ function TNotes({
             />
           ) : (
             <TNList
+              note={note}
               setNote={setNote}
               notes={tnotes}
               toolId={toolId}
@@ -45,6 +47,7 @@ function TNotes({
               classes={classes.list}
               handleClick={handleClickNote}
               idContainerScroll={idContainerScroll}
+              delayScroll={delayScroll}
             />
           )}
         </div>
@@ -81,6 +84,8 @@ TNotes.propTypes = {
   handleClickNote: PropTypes.func,
   // The id of the container
   idContainerScroll: PropTypes.string,
+  // The delay for the scroll
+  delayScroll: PropTypes.number,
 };
 TNotes.defaultProps = {
   currentScrollVerse: '0',
@@ -95,5 +100,6 @@ TNotes.defaultProps = {
   nodeContentBack: <span>←</span>,
   handleClickNote: () => {},
   idContainerScroll: 'container-tn',
+  delayScroll: 300,
 };
 export default TNotes;

@@ -18,8 +18,10 @@ function TWords({
   handleClickWord,
   idContainerScroll,
   filter,
+  word,
+  setWord,
+  delayScroll,
 }) {
-  const [word, setWord] = useState(null);
   return (
     <>
       {isLoading ? (
@@ -47,6 +49,7 @@ function TWords({
               handleClick={handleClickWord}
               idContainerScroll={idContainerScroll}
               filter={filter}
+              delayScroll={delayScroll}
             />
           )}
         </div>
@@ -85,20 +88,23 @@ TWords.propTypes = {
   idContainerScroll: PropTypes.string,
   // The filter for the list
   filter: PropTypes.string,
+  // The delay scroll
+  delayScroll: PropTypes.number,
 };
 TWords.defaultProps = {
   currentScrollVerse: '0',
   setCurrentScrollVerse: () => {},
   twords: {},
   isLoading: false,
-  toolId: 'tn',
+  toolId: 'tw',
   startHighlightIds: {},
   scrollTopOffset: 20,
   classes: {},
   nodeLoading: <span>Loading...</span>,
   nodeContentBack: <span>←</span>,
   handleClickWord: () => {},
-  idContainerScroll: 'container-tn',
+  idContainerScroll: 'container-tw',
   filter: 'disabled',
+  delayScroll: 300,
 };
 export default TWords;
