@@ -3,19 +3,30 @@ import PropTypes from 'prop-types';
 import { checkLSVal } from '../../utils/helper';
 
 function useScroll({
-  toolId,
-  isLoading,
-  idVersePrefix,
-  idContainerScroll,
-  keyLocalStorageSave,
-  scrollTopOffset,
-  currentScrollVerse,
-  setCurrentScrollVerse,
-  delayScroll,
+  currentScrollVerse = '0',
+  setCurrentScrollVerse = () => {},
+  toolId = 'toolId',
+  isLoading = false,
+  idVersePrefix = 'id',
+  idContainerScroll = 'container-scroll',
+  scrollTopOffset = 20,
+  delayScroll = 300,
+  keyLocalStorageSave = 'highlightIds',
 }) {
   const [highlightIds, setHighlightIds] = useState(() => {
     return checkLSVal(keyLocalStorageSave, {}, 'object');
   });
+  const handleSaveScroll = (verse, id) => {
+    if (id) {
+      localStorage.setItem(
+        keyLocalStorageSave,
+        JSON.stringify({ ...highlightIds, [toolId]: 'id' + id })
+      );
+      setHighlightIds((prev) => ({ ...prev, [toolId]: 'id' + id }));
+    }
+    setCurrentScrollVerse(verse);
+  };
+
   useEffect(() => {
     setTimeout(() => {
       const element = document.getElementById(idVersePrefix + currentScrollVerse);
@@ -31,17 +42,6 @@ function useScroll({
       }
     }, delayScroll);
   }, [currentScrollVerse, isLoading]);
-
-  const handleSaveScroll = (verse, id) => {
-    if (id) {
-      localStorage.setItem(
-        keyLocalStorageSave,
-        JSON.stringify({ ...highlightIds, [toolId]: 'id' + id })
-      );
-      setHighlightIds((prev) => ({ ...prev, [toolId]: 'id' + id }));
-    }
-    setCurrentScrollVerse(verse);
-  };
 
   return {
     highlightId: highlightIds[toolId],
@@ -70,15 +70,4 @@ useScroll.propTypes = {
   keyLocalStorageSave: PropTypes.string,
 };
 
-useScroll.defaultProps = {
-  currentScrollVerse: '0',
-  setCurrentScrollVerse: () => {},
-  toolId: 'toolId',
-  isLoading: false,
-  idVersePrefix: 'id',
-  idContainerScroll: 'container-scroll',
-  scrollTopOffset: 20,
-  delayScroll: 300,
-  keyLocalStorageSave: 'highlightIds',
-};
 export default useScroll;

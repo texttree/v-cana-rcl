@@ -27,7 +27,6 @@ function Component() {
         handleClickNote={(note) => console.log(note)}
         currentScrollVerse={currentScrollVerse}
         setCurrentScrollVerse={setCurrentScrollVerse}
-        toolId="tnotes"
         idContainerScroll="container_tnotes32"
       />
     </div>

@@ -28,7 +28,6 @@ function TNList({
     idContainerScroll,
     delayScroll,
   });
-  console.log(idVersePrefix);
 
   useEffect(() => {
     if (notes) {
