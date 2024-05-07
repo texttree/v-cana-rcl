@@ -397,3 +397,154 @@ export const style = {
   removeButton: { paddingLeft: '5px' },
   renameInput: { width: '120px' },
 };
+
+export const alphabet = [
+  'd',
+  's',
+  'r',
+  'a',
+  '5',
+  'b',
+  'c',
+  '3',
+  '1',
+  '2',
+  'f',
+  'g',
+  'h',
+  'i',
+  'j',
+  'k',
+  'l',
+  'm',
+  'n',
+  'o',
+  'p',
+  'q',
+  't',
+  'u',
+  'v',
+  'w',
+  'x',
+  'y',
+  'z',
+];
+
+export const words = [
+  {
+    id: '00qijx3ux',
+    project_id: 5,
+    title: 'Авель\n',
+    data: {
+      time: 1670935489881,
+      blocks: [
+        {
+          id: 'bjHjhiKIx1',
+          type: 'paragraph',
+          data: {
+            text: 'сын Адама<br>',
+          },
+        },
+      ],
+      version: '2.25.0',
+    },
+    deleted_at: null,
+    total_records: 6,
+  },
+  {
+    id: '00cku7q6k',
+    project_id: 5,
+    title: 'Адам',
+    data: {
+      time: 1670935589335,
+      blocks: [
+        {
+          id: 'y4iyToCRdD',
+          type: 'paragraph',
+          data: {
+            text: 'Человек',
+          },
+        },
+      ],
+      version: '2.25.0',
+    },
+    deleted_at: null,
+    total_records: 6,
+  },
+  {
+    id: '00lygitrc',
+    project_id: 5,
+    title: 'Новое',
+    data: {
+      time: 1670935651501,
+      blocks: [
+        {
+          id: 'X8BzswOXWv',
+          type: 'paragraph',
+          data: {
+            text: 'Новое слово<br>',
+          },
+        },
+      ],
+      version: '2.25.0',
+    },
+    deleted_at: null,
+    total_records: 6,
+  },
+  {
+    id: '00eliiwks',
+    project_id: 5,
+    title: 'Слово\n',
+    data: {
+      time: 1670935702206,
+      blocks: [
+        {
+          id: '1oRbmeuQCc',
+          type: 'paragraph',
+          data: {
+            text: 'Слово',
+          },
+        },
+      ],
+      version: '2.25.0',
+    },
+    deleted_at: null,
+    total_records: 6,
+  },
+  {
+    id: '001q7js4k',
+    project_id: 5,
+    title: 'ЯХВЕ',
+    data: {
+      time: 1682605457726,
+      blocks: [
+        {
+          id: '4SuD2jSIIj',
+          type: 'paragraph',
+          data: {
+            text: 'Переводим как ГОСПОДЬ',
+          },
+        },
+      ],
+      version: '2.25.0',
+    },
+    deleted_at: null,
+    total_records: 6,
+  },
+  {
+    id: '00ocawgyb',
+    project_id: 5,
+    title: 'новое слово_new',
+    data: {
+      blocks: [
+        {
+          type: 'paragraph',
+          data: {},
+        },
+      ],
+      version: '2.27.2',
+    },
+    deleted_at: null,
+    total_records: 6,
+  },
+];

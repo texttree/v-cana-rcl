@@ -3,7 +3,7 @@
 ### Minimal demo
 
 ```jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { simpleNotes, icons } from '../../../mocks/notesEditor.js';
 import { NotesEditor } from '@texttree/v-cana-rcl';
 
@@ -21,6 +21,16 @@ function Component() {
       setDatabaseNotes(updatedNotes);
     }
   };
+
+  useEffect(() => {
+    if (!activeNote) return;
+    const index = databaseNotes.findIndex((note) => note.id === activeNote.id);
+    if (index !== -1) {
+      const updatedNotes = [...databaseNotes];
+      updatedNotes[index] = activeNote;
+      setDatabaseNotes(updatedNotes);
+    }
+  }, [activeNote]);
 
   return (
     <NotesEditor

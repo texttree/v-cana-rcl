@@ -8,12 +8,51 @@ let sections = [
     content: 'README.md',
   },
   {
-    name: 'NotesEditor Block',
+    name: 'Bible',
+    components: ['src/components/Resources/Bible/Bible.js'],
+  },
+  {
+    name: 'TN',
+    components: [
+      'src/components/Resources/TN/TNotes.js',
+      'src/components/Resources/TN/TNContent.js',
+      'src/components/Resources/TN/TNList.js',
+    ],
+  },
+  {
+    name: 'TW',
+    components: [
+      'src/components/Resources/TW/TWords.js',
+      'src/components/Resources/TW/TWList.js',
+    ],
+  },
+  {
+    name: 'TQ',
+    components: [
+      'src/components/Resources/TQ/TQuestion.js',
+      'src/components/Resources/TQ/TQuestions.js',
+    ],
+  },
+  {
+    name: 'NotesEditor',
     components: [
       'src/components/Notes/NotesEditor.js',
       'src/components/Notes/MenuButtons.js',
     ],
   },
+  {
+    name: 'Dictionary Block',
+    components: ['src/components/Notes/WordsList.js', 'src/components/Notes/Alphabet.js'],
+  },
+  {
+    name: 'Markdown',
+    components: ['src/components/Markdown/Markdown.js'],
+  },
+
+  // {
+  //   name: 'Workspace Block',
+  //   components: ['src/components/Workspace/Workspace.js'],
+  // },
 ];
 
 module.exports = {
@@ -100,6 +139,10 @@ module.exports = {
           test: /\.jsx?$/,
           exclude: /node_modules/,
           loader: 'babel-loader',
+        },
+        {
+          test: /\.css$/,
+          use: ['style-loader', 'css-loader'],
         },
       ],
     },

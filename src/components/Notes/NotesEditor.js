@@ -25,9 +25,10 @@ const NotesEditor = ({
   handleBack,
   placeholderSearch,
   emptyTitle,
+  term,
+  setTerm,
 }) => {
   const [notesTreeview, setNotesTreeview] = useState(notes);
-  const [term, setTerm] = useState('');
   const [hoveredNodeId, setHoveredNodeId] = useState(null);
   const [isShowMenu, setIsShowMenu] = useState(false);
   const [contextMenuEvent, setContextMenuEvent] = useState(null);
@@ -45,7 +46,6 @@ const NotesEditor = ({
     setIsShowMenu(true);
     setContextMenuEvent({ event });
   };
-
   return (
     <div className={classes.container}>
       {!activeNote || !Object.keys(activeNote)?.length ? (
@@ -102,7 +102,7 @@ const NotesEditor = ({
         </>
       ) : (
         <>
-          <div
+          <button
             className={classes.back}
             onClick={() => {
               handleSaveNote();
@@ -112,7 +112,7 @@ const NotesEditor = ({
             }}
           >
             {icons.left}
-          </div>
+          </button>
           <Redactor
             classes={classes.redactor}
             activeNote={activeNote}
