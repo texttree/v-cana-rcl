@@ -42,10 +42,7 @@ let sections = [
   },
   {
     name: 'Dictionary Block',
-    components: [
-      'src/components/Notes/Dictionary.js',
-      'src/components/Notes/Alphabet.js',
-    ],
+    components: ['src/components/Notes/WordsList.js', 'src/components/Notes/Alphabet.js'],
   },
   {
     name: 'Markdown',

@@ -1,7 +1,7 @@
 import { ListOfNotes, Redactor } from '@texttree/notepad-rcl/dist/components';
 import React from 'react';
 
-function Dictionary({
+function WordsList({
   words = [],
   setWordId,
   isRtl,
@@ -64,4 +64,4 @@ function Dictionary({
   );
 }
 
-export default Dictionary;
+export default WordsList;

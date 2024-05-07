@@ -2,7 +2,7 @@
 
 ```jsx
 import { useState, useEffect } from 'react';
-import { Dictionary } from '@texttree/v-cana-rcl';
+import { WordsList } from '@texttree/v-cana-rcl';
 import { words } from '../../../mocks/notesEditor.js';
 
 function Component() {
@@ -18,7 +18,7 @@ function Component() {
   }, [wordId]);
 
   return (
-    <Dictionary
+    <WordsList
       words={words}
       setWordId={setWordId}
       activeWord={activeWord}
@@ -49,7 +49,7 @@ function Component() {
 
 ```jsx
 import { useState, useEffect } from 'react';
-import { Dictionary } from '@texttree/v-cana-rcl';
+import { WordsList } from '@texttree/v-cana-rcl';
 import { words as defaultWords } from '../../../mocks/notesEditor.js';
 
 function Component() {
@@ -87,7 +87,7 @@ function Component() {
           Add word
         </button>
       )}
-      <Dictionary
+      <WordsList
         words={words}
         setWordId={setWordId}
         activeWord={activeWord}

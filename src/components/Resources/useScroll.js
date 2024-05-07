@@ -31,7 +31,6 @@ function useScroll({
     setTimeout(() => {
       const element = document.getElementById(idVersePrefix + currentScrollVerse);
       const container = document.getElementById(idContainerScroll);
-
       if (element && container) {
         container.scrollBy({
           top:

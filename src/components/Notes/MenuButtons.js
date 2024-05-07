@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 
 import DropdownMenu from './DropdownMenu';
 
-function MenuButtons({ classNames, menuItems = {}, icons = { plus: '', dots: '' } }) {
+function MenuButtons({
+  classNames,
+  menuItems = {},
+  icons = { plus: '', dots: '' },
+  disabled = false,
+}) {
   const [isOpenDotsMenu, setIsOpenDotsMenu] = useState(false);
   const [isOpenPlusMenu, setIsOpenPlusMenu] = useState(false);
 
@@ -21,7 +26,11 @@ function MenuButtons({ classNames, menuItems = {}, icons = { plus: '', dots: '' 
     <div className={classNames.container}>
       {buttons.map(({ id, icon, menu, action, isOpen }) => (
         <div key={id} className={classNames.buttonContainer}>
-          <button className={classNames.button} onClick={() => action((prev) => !prev)}>
+          <button
+            className={classNames.button}
+            onClick={() => action((prev) => !prev)}
+            disabled={disabled}
+          >
             {icon}
           </button>
           <DropdownMenu
