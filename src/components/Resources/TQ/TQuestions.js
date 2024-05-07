@@ -91,7 +91,7 @@ TQuestions.propTypes = {
     verseBlock: PropTypes.string, // Styles for the verse block
     currentQuestion: PropTypes.string, // Styles for the current question
     questionWrapper: PropTypes.string, // Styles for the question wrapper,
-    question: PropTypes.string, // Styles for the question
+    question: PropTypes.object, // Styles for the question
   }),
   // Function to handle click events
   handleClick: PropTypes.func,
