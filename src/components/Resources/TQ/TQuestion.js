@@ -3,7 +3,13 @@ import ReactMarkdown from 'react-markdown';
 import PropTypes from 'prop-types';
 import { Disclosure } from '@headlessui/react';
 
-function TQuestion({ questionObject, highlightId, nodeOpen, classes }) {
+function TQuestion({
+  questionObject,
+
+  highlightId = '',
+  nodeOpen = <span>Open</span>,
+  classes = {},
+}) {
   return (
     <Disclosure>
       <Disclosure.Button
@@ -25,7 +31,7 @@ function TQuestion({ questionObject, highlightId, nodeOpen, classes }) {
 
 TQuestion.proptypes = {
   // Object representing an item with id, question, and answer
-  item: PropTypes.shape({
+  questionObject: PropTypes.shape({
     id: PropTypes.string,
     question: PropTypes.string,
     answer: PropTypes.string,
@@ -41,17 +47,6 @@ TQuestion.proptypes = {
     content: PropTypes.string, // Styles for the content
     title: PropTypes.string, // Styles for the title
   }),
-};
-
-TQuestion.defaultProps = {
-  item: {
-    id: '',
-    question: '',
-    answer: '',
-  },
-  highlightId: '',
-  nodeOpen: <span>Open</span>,
-  classes: {},
 };
 
 export default TQuestion;

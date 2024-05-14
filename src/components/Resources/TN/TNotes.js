@@ -5,18 +5,18 @@ import TNList from './TNList';
 import TNContent from './TNContent';
 
 function TNotes({
-  tnotes,
-  isLoading,
-  toolId,
-  currentScrollVerse,
-  setCurrentScrollVerse,
-  scrollTopOffset,
-  classes,
-  nodeLoading,
-  nodeContentBack,
-  handleClickNote,
-  idContainerScroll,
-  delayScroll,
+  currentScrollVerse = '0',
+  setCurrentScrollVerse = () => {},
+  tnotes = {},
+  isLoading = false,
+  toolId = 'tn',
+  scrollTopOffset = 20,
+  classes = {},
+  nodeLoading = <span>Loading...</span>,
+  nodeContentBack = <span>←</span>,
+  handleClickNote = () => {},
+  idContainerScroll = 'container-tn',
+  delayScroll = 300,
 }) {
   const [note, setNote] = useState(null);
   return (
@@ -82,19 +82,5 @@ TNotes.propTypes = {
   idContainerScroll: PropTypes.string,
   // The delay for the scroll
   delayScroll: PropTypes.number,
-};
-TNotes.defaultProps = {
-  currentScrollVerse: '0',
-  setCurrentScrollVerse: () => {},
-  tnotes: {},
-  isLoading: false,
-  toolId: 'tn',
-  scrollTopOffset: 20,
-  classes: {},
-  nodeLoading: <span>Loading...</span>,
-  nodeContentBack: <span>←</span>,
-  handleClickNote: () => {},
-  idContainerScroll: 'container-tn',
-  delayScroll: 300,
 };
 export default TNotes;

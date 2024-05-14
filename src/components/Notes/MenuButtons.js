@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import DropdownMenu from './DropdownMenu';
 
 function MenuButtons({
-  classNames,
+  disabled = false,
+  classNames = {},
   menuItems = {},
   icons = { plus: '', dots: '' },
-  disabled = false,
 }) {
   const [isOpenDotsMenu, setIsOpenDotsMenu] = useState(false);
   const [isOpenPlusMenu, setIsOpenPlusMenu] = useState(false);
@@ -58,10 +58,4 @@ MenuButtons.propTypes = {
     // The icon to represent a menu or more options action
     dots: PropTypes.node,
   }),
-};
-
-MenuButtons.defaultProps = {
-  classNames: {},
-  menuItems: {},
-  icons: { plus: '', dots: '' },
 };

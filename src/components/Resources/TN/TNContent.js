@@ -1,7 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Markdown from '../../Markdown/Markdown';
-function TNContent({ setNote, note, classes, nodeBack }) {
+function TNContent({
+  setNote = () => {},
+  note = null,
+  classes = {
+    container: '',
+    header: '',
+    backButton: '',
+    title: '',
+    text: '',
+  },
+  nodeBack = <span>←</span>,
+}) {
   return (
     <div className={`${classes.container} ${note ? '' : 'hidden'}`}>
       <div className={classes.header}>
@@ -36,16 +47,4 @@ TNContent.propTypes = {
   nodeBack: PropTypes.element,
 };
 
-TNContent.defaultProps = {
-  setNote: () => {},
-  note: null,
-  classes: {
-    container: '',
-    header: '',
-    backButton: '',
-    title: '',
-    text: '',
-  },
-  nodeBack: <span>←</span>,
-};
 export default TNContent;

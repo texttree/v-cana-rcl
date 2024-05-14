@@ -3,11 +3,11 @@ import { Transition, Dialog } from '@headlessui/react';
 import PropTypes from 'prop-types';
 
 function Modal({
-  title,
-  isOpen,
-  children,
-  closeHandle,
-  className: propsClassNames = {},
+  title = '',
+  isOpen = false,
+  children = null,
+  closeHandle = () => {},
+  propsClassNames = {},
   handleCloseDisabled = false,
 }) {
   const classNames = {
@@ -80,13 +80,4 @@ Modal.propTypes = {
   className: PropTypes.object,
   //Indicates whether the modal close action is disabled or not. Defaults to false.
   handleCloseDisabled: PropTypes.bool,
-};
-
-Modal.defaultProps = {
-  title: '',
-  isOpen: false,
-  children: null,
-  closeHandle: () => {},
-  className: {},
-  handleCloseDisabled: false,
 };

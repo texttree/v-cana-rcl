@@ -4,29 +4,29 @@ import { Redactor, TreeView, ContextMenu } from '@texttree/notepad-rcl';
 import { convertNotesToTree } from '../../utils/helper';
 
 const NotesEditor = ({
-  activeNote,
-  notes,
-  currentNodeProps,
-  selectedNodeId,
-  handleDragDrop,
-  setActiveNote,
-  setCurrentNodeProps,
-  handleRenameNode,
-  handleSaveNote,
-  handleRemoveNode,
-  icons,
-  setSelectedNodeId,
-  menuItems,
-  isSearch,
-  classes,
-  placeholderRedactor,
-  style,
-  isContextMenu,
-  handleBack,
-  placeholderSearch,
-  emptyTitle,
-  term,
-  setTerm,
+  term = '',
+  setTerm = () => {},
+  activeNote = null,
+  notes = [],
+  currentNodeProps = {},
+  selectedNodeId = null,
+  handleDragDrop = null,
+  setActiveNote = () => {},
+  setCurrentNodeProps = () => {},
+  handleRenameNode = () => {},
+  handleSaveNote = () => {},
+  handleRemoveNode = () => {},
+  icons = {},
+  setSelectedNodeId = () => {},
+  menuItems = {},
+  isSearch = false,
+  classes = {},
+  placeholderRedactor = 'Text new note',
+  style = {},
+  isContextMenu = false,
+  handleBack = () => {},
+  placeholderSearch = 'Search',
+  emptyTitle = 'Empty title',
 }) => {
   const [notesTreeview, setNotesTreeview] = useState(notes);
   const [hoveredNodeId, setHoveredNodeId] = useState(null);
@@ -128,30 +128,6 @@ const NotesEditor = ({
 };
 export default NotesEditor;
 
-NotesEditor.defaultProps = {
-  activeNote: null,
-  notes: [],
-  currentNodeProps: {},
-  selectedNodeId: null,
-  handleDragDrop: null,
-  setActiveNote: () => {},
-  setCurrentNodeProps: () => {},
-  handleRenameNode: () => {},
-  handleSaveNote: () => {},
-  handleRemoveNode: () => {},
-  icons: {},
-  setSelectedNodeId: () => {},
-  menuItems: {},
-  isSearch: false,
-  classes: {},
-  placeholderRedactor: 'Text new note',
-  style: {},
-  isContextMenu: false,
-  handleBack: () => {},
-  placeholderSearch: 'Search',
-  emptyTitle: 'Empty title',
-};
-
 NotesEditor.propTypes = {
   // The active note object.
   activeNote: PropTypes.object,
@@ -210,4 +186,8 @@ NotesEditor.propTypes = {
   emptyTitle: PropTypes.string,
   // Indicates if the component is in search mode.
   isSearch: PropTypes.bool,
+  // Query string to search for.
+  term: PropTypes.string,
+  // Function to set the search term.
+  setTerm: PropTypes.func,
 };

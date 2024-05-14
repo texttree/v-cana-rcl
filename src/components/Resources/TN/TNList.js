@@ -4,17 +4,17 @@ import ReactMarkdown from 'react-markdown';
 import useScroll from '../useScroll';
 
 function TNList({
-  setNote,
-  notes,
-  toolId,
-  isLoading,
-  scrollTopOffset,
-  currentScrollVerse,
-  setCurrentScrollVerse,
-  classes,
-  handleClick,
-  idContainerScroll,
-  delayScroll,
+  setNote = () => {},
+  currentScrollVerse = '0',
+  setCurrentScrollVerse = () => {},
+  notes = {},
+  toolId = 'tn',
+  isLoading = false,
+  scrollTopOffset = 20,
+  classes = {},
+  handleClick = () => {},
+  idContainerScroll = 'container-tn',
+  delayScroll = 300,
 }) {
   const [verses, setVerses] = useState([]);
   const idVersePrefix = 'id' + toolId;
@@ -103,19 +103,6 @@ TNList.propTypes = {
   idContainerScroll: PropTypes.string,
   // The delay for the scroll
   delayScroll: PropTypes.number,
-};
-
-TNList.defaultProps = {
-  currentScrollVerse: '0',
-  setCurrentScrollVerse: () => {},
-  notes: {},
-  toolId: 'tn',
-  isLoading: false,
-  scrollTopOffset: 20,
-  classes: {},
-  handleClick: () => {},
-  idContainerScroll: 'container-tn',
-  delayScroll: 300,
 };
 
 export default TNList;

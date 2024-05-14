@@ -1,7 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-function DropdownMenu({ menuItems, classNames, isOpenMenu, setIsOpenMenu }) {
+function DropdownMenu({
+  menuItems = [],
+  classNames = {
+    container: {},
+    item: {},
+  },
+  isOpenMenu = false,
+  setIsOpenMenu = () => {},
+}) {
   const menuRef = useRef(null);
   useEffect(() => {
     function handleClickOutside(event) {
@@ -40,15 +48,6 @@ function DropdownMenu({ menuItems, classNames, isOpenMenu, setIsOpenMenu }) {
 }
 export default DropdownMenu;
 
-DropdownMenu.defaultProps = {
-  menuItems: [],
-  classNames: {
-    container: {},
-    item: {},
-  },
-  isOpenMenu: false,
-  setIsOpenMenu: () => {},
-};
 DropdownMenu.propTypes = {
   /**
    * An array of menu item objects with id, buttonContent and action properties.

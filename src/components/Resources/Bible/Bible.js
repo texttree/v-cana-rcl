@@ -4,16 +4,15 @@ import Verse from './Verse';
 import useScroll from '../useScroll';
 
 function Bible({
-  verseObjects,
-  isLoading,
-  isDraft,
-  classes,
-  toolId,
-  currentScrollVerse,
-  setCurrentScrollVerse,
-  hiddenVerses,
-  nodeLoading,
-  idContainerScroll,
+  currentScrollVerse = '0',
+  setCurrentScrollVerse = () => {},
+  verseObjects = [],
+  isLoading = false,
+  isDraft = false,
+  classes = {},
+  toolId = 'default',
+  hiddenVerses = [],
+  nodeLoading = <div>Loading...</div>,
 }) {
   const { handleSaveScroll } = useScroll({
     toolId,
@@ -64,20 +63,6 @@ Bible.propTypes = {
   hiddenVerses: PropTypes.array,
   // A React node to render when the content is still loading
   nodeLoading: PropTypes.node,
-  // The id of the container to scroll to
-  idContainerScroll: PropTypes.string,
 };
 
-Bible.defaultProps = {
-  currentScrollVerse: '0',
-  setCurrentScrollVerse: () => {},
-  verseObjects: [],
-  isLoading: false,
-  isDraft: false,
-  classes: {},
-  toolId: 'default',
-  hiddenVerses: [],
-  nodeLoading: <div>Loading...</div>,
-  idContainerScroll: 'container-scroll',
-};
 export default Bible;
