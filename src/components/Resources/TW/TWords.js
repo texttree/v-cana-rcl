@@ -5,21 +5,21 @@ import TWList from './TWList';
 import TNContent from '../TN/TNContent';
 
 function TWords({
-  twords,
-  isLoading,
-  toolId,
-  currentScrollVerse,
-  setCurrentScrollVerse,
-  scrollTopOffset,
-  classes,
-  nodeLoading,
-  nodeContentBack,
-  handleClickWord,
-  idContainerScroll,
-  filter,
   word,
   setWord,
-  delayScroll,
+  currentScrollVerse = '0',
+  setCurrentScrollVerse = () => {},
+  twords = {},
+  isLoading = false,
+  toolId = 'tw',
+  scrollTopOffset = 20,
+  classes = {},
+  nodeLoading = <span>Loading...</span>,
+  nodeContentBack = <span>←</span>,
+  handleClickWord = () => {},
+  idContainerScroll = 'container-tw',
+  filter = 'disabled',
+  delayScroll = 300,
 }) {
   return (
     <>
@@ -87,19 +87,5 @@ TWords.propTypes = {
   // The delay scroll
   delayScroll: PropTypes.number,
 };
-TWords.defaultProps = {
-  currentScrollVerse: '0',
-  setCurrentScrollVerse: () => {},
-  twords: {},
-  isLoading: false,
-  toolId: 'tw',
-  scrollTopOffset: 20,
-  classes: {},
-  nodeLoading: <span>Loading...</span>,
-  nodeContentBack: <span>←</span>,
-  handleClickWord: () => {},
-  idContainerScroll: 'container-tw',
-  filter: 'disabled',
-  delayScroll: 300,
-};
+
 export default TWords;

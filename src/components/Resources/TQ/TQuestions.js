@@ -4,15 +4,15 @@ import useScroll from '../useScroll';
 import TQuestion from './TQuestion';
 function TQuestions({
   questionObjects,
-  toolId,
-  isLoading,
-  currentScrollVerse,
-  setCurrentScrollVerse,
-  scrollTopOffset,
-  classes,
-  handleClick,
-  nodeOpen,
-  idContainerScroll,
+  currentScrollVerse = '0',
+  setCurrentScrollVerse = () => {},
+  toolId = 'tn',
+  isLoading = false,
+  scrollTopOffset = 20,
+  classes = {},
+  handleClick = () => {},
+  nodeOpen = <span>Open</span>,
+  idContainerScroll = 'container-scroll',
 }) {
   const idVersePrefix = 'id' + toolId;
   const { highlightId, handleSaveScroll } = useScroll({
@@ -101,17 +101,4 @@ TQuestions.propTypes = {
   idContainerScroll: PropTypes.string,
 };
 
-TQuestions.defaultProps = {
-  currentScrollVerse: '0',
-  setCurrentScrollVerse: () => {},
-  setItem: () => {},
-  notes: {},
-  toolId: 'tn',
-  isLoading: false,
-  scrollTopOffset: 20,
-  classes: {},
-  handleClick: () => {},
-  nodeOpen: <span>Open</span>,
-  idContainerScroll: 'container-scroll',
-};
 export default TQuestions;

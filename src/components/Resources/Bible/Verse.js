@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
 function Verse({
   verseObject,
-  currentScrollVerse,
-  classes,
-  toolId,
-  handleSaveScroll,
-  isDraft,
-  hiddenVerses,
+  currentScrollVerse = '0',
+  classes = {},
+  isDraft = false,
+  hiddenVerses = [],
+  handleSaveScroll = () => {},
+  toolId = 'default',
 }) {
   const { verse, text } = verseObject;
   const hiddenCurrent = hiddenVerses.includes(verse);
@@ -52,15 +52,6 @@ Verse.propTypes = {
   isDraft: PropTypes.bool,
   // An array of hidden verses.
   hiddenVerses: PropTypes.arrayOf(PropTypes.string),
-};
-
-Verse.defaultProps = {
-  currentScrollVerse: '0',
-  classes: {},
-  isDraft: false,
-  hiddenVerses: [],
-  handleSaveScroll: () => {},
-  toolId: 'default',
 };
 
 export default Verse;

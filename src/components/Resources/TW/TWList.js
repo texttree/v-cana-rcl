@@ -4,18 +4,18 @@ import PropTypes from 'prop-types';
 import useScroll from '../useScroll';
 
 function TWList({
-  setWord,
-  words,
-  toolId,
-  isLoading,
-  scrollTopOffset,
-  currentScrollVerse,
-  setCurrentScrollVerse,
-  classes,
-  handleClick,
-  idContainerScroll,
-  filter,
-  delayScroll,
+  setWord = () => {},
+  currentScrollVerse = '0',
+  setCurrentScrollVerse = () => {},
+  words = {},
+  toolId = 'tw',
+  isLoading = false,
+  scrollTopOffset = 20,
+  classes = {},
+  handleClick = () => {},
+  idContainerScroll = 'container-tw',
+  filter = 'disabled',
+  delayScroll = 300,
 }) {
   const [verses, setVerses] = useState([]);
   const idVersePrefix = 'id' + toolId;
@@ -121,20 +121,6 @@ TWList.propTypes = {
   filter: PropTypes.string,
   // The delay for the scroll
   delayScroll: PropTypes.number,
-};
-
-TWList.defaultProps = {
-  currentScrollVerse: '0',
-  setCurrentScrollVerse: () => {},
-  words: {},
-  toolId: 'tw',
-  isLoading: false,
-  scrollTopOffset: 20,
-  classes: {},
-  handleClick: () => {},
-  idContainerScroll: 'container-tw',
-  filter: 'disabled',
-  delayScroll: 300,
 };
 
 export default TWList;
